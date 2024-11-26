@@ -41,11 +41,6 @@ def handle_entry(journal: Journal):
         2: "I feel incredible"
     }
 
-    prompt = f"""
-        I'm feeding you three pieces of information: How I'm feeling today, a journal entry title, and some thoughts.\nGiven my emotional state, please respond to my journal entry with any advice, words of affirmation, and some general mental health reminders.
-        There's no need to lead with a greeting, please just get right into the advice.\nToday: {emotions_map[journal.feeling]}\nTitle: {journal.title}\nEntry: {journal.journal_entry}
-    """
-
     completion = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
@@ -56,6 +51,5 @@ def handle_entry(journal: Journal):
     )
 
     return {
-        "prompt": prompt,
         "response": completion.choices[0].message
     }
