@@ -13,11 +13,13 @@ function App() {
 
     const handleFormSubmit = (event) => {
         event.preventDefault();
-        console.log("event prevented")
 
         fetch("http://localhost:8000/journal", {
             method: "POST",
-            formData
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formData)
         })
         .then(data => data.json())
         .then(json => setResults(json))
@@ -44,14 +46,14 @@ function App() {
                             {feeling: 1, label: ":)"},
                             {feeling: 2, label: ":))"},
                         ].map((option, i) => 
-                        <div className="option">
+                        <div key={i} className="option">
                             <label>{option.label}</label>
                             <input type="radio" onChange={() => setFormData({...formData, feeling: option.feeling})} value={option.feeling} />                        
                         </div>
                         )
                     }
                 </div>
-                <input onChange={e => debounce(e.target.value, 1000)} type="textarea" />
+                <textarea onChange={e => debounce(e.target.value, 500)} rows="10" cols="100"></textarea>
                 <input type="submit" value="gogogo" />
             </form>
 
