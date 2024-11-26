@@ -22,7 +22,7 @@ function App() {
             body: JSON.stringify(formData)
         })
         const json = await data.json()
-        setResults(json)
+        setResults(json.response)
     }
 
     return (
@@ -58,7 +58,7 @@ function App() {
             </form>
 
             <div className="results-container">
-                {results && results.response.content}
+                {results && results.content}
             </div>
         </div>
     )
