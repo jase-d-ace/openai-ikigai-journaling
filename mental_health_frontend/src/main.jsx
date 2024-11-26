@@ -6,10 +6,12 @@ import App from './App.jsx'
 import Nav from "./components/Nav.jsx";
 import HistoricalContainer from './components/HistoricalContainer.jsx';
 import Footer from "./components/Footer.jsx";
+import TopBar from './components/TopBar.jsx';
 
 createRoot(document.getElementById('root')).render(
     <StrictMode>
         <BrowserRouter>
+            <TopBar />
             <Nav />
             <Routes>
                 <Route path="/" element={<App />} />
