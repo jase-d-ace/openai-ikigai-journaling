@@ -5,6 +5,7 @@ import './index.css'
 import App from './App.jsx'
 import Nav from "./components/Nav.jsx";
 import HistoricalContainer from './components/HistoricalContainer.jsx';
+import Footer from "./components/Footer.jsx";
 
 createRoot(document.getElementById('root')).render(
     <StrictMode>
@@ -14,6 +15,7 @@ createRoot(document.getElementById('root')).render(
                 <Route path="/" element={<App />} />
                 <Route path="/historical" element={<HistoricalContainer />} />
             </Routes>
+            <Footer />
         </BrowserRouter>
     </StrictMode>
 )
