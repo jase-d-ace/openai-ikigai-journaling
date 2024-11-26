@@ -12,13 +12,17 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+body {
+    margin: 0;
+}
+
 
 .navigation {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     background-color: #B3F2FF;
-    padding-top: 1em;
+    padding-top: 0.5em;
     height: 2em;
 }
 
