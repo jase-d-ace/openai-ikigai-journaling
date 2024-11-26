@@ -5,25 +5,24 @@ function App() {
     const [formData, setFormData] = useState({})
     const [results, setResults] = useState(null)
 
-    const debounce = (query, interval) => {
+    const debounce = (name, query, interval) => {
         setTimeout(() => {
-            setFormData({...formData, journal_entry: query})
+            setFormData({...formData, [name]: query})
         }, interval)
     }
 
-    const handleFormSubmit = (event) => {
+    const handleFormSubmit = async (event) => {
         event.preventDefault();
 
-        fetch("http://localhost:8000/journal", {
+        const data = await fetch("http://localhost:8000/journal", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(formData)
         })
-        .then(data => data.json())
-        .then(json => setResults(json))
-        .catch(e => setResults(e))
+        const json = await data.json()
+        setResults(json)
     }
 
     return (
@@ -37,6 +36,7 @@ function App() {
                 </h3>
             </header>
             <form onSubmit={handleFormSubmit}>
+                <input type="text" placeholder="title" onChange={e => debounce("title", e.target.value, 500)} />
                 <div className="feeling-gauge">
                     {
                         [
@@ -53,12 +53,12 @@ function App() {
                         )
                     }
                 </div>
-                <textarea onChange={e => debounce(e.target.value, 500)} rows="10" cols="100"></textarea>
+                <textarea onChange={e => debounce("journal_entry", e.target.value, 500)} rows="10" cols="100"></textarea>
                 <input type="submit" value="gogogo" />
             </form>
 
             <div className="results-container">
-                {results && JSON.stringify(results)}
+                {results && results.response.content}
             </div>
         </div>
     )
