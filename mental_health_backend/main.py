@@ -1,10 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from openai import OpenAI
 from .models.journal import Journal
+from .settings import OPENAI_API_KEY # if this apikey is on github, you're totally cooked. Please triple check settings has not been committed. Please.
 
 import logging
 
 app = FastAPI()
+client = OpenAI(api_key=OPENAI_API_KEY)
 
 
 origins = [
@@ -30,10 +33,29 @@ def read_root():
 
 @app.post("/journal")
 def handle_entry(journal: Journal):
+    emotions_map = {
+        -2: "I feel awful",
+        -1: "I don't feel great",
+        0: "I feel neutral or I'm having trouble feeling at all",
+        1: "I actually feel okay",
+        2: "I feel incredible"
+    }
 
-    logging.warning("======================")
-    logging.warning(journal)
-    logging.warning("======================")
+    prompt = f"""
+        I'm feeding you three pieces of information: How I'm feeling today, a journal entry title, and some thoughts.\nGiven my emotional state, please respond to my journal entry with any advice, words of affirmation, and some general mental health reminders.
+        There's no need to lead with a greeting, please just get right into the advice.\nToday: {emotions_map[journal.feeling]}\nTitle: {journal.title}\nEntry: {journal.journal_entry}
+    """
+
+    completion = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content": "You will receive three pieces of information: a Feeling, a Title, and an Entry. Please respond to the entry and feeling as someone who cares about the writer's mental wellbeing, and provide affirmations, advice, and any relevant mental health reminders. There's no need to lead with a greeting, please just get right into the advice."},
+            {"role": "user", "content": f"Today: {emotions_map[journal.feeling]}\nTitle: {journal.title}\nEntry: {journal.journal_entry}"}
+        ],
+        temperature=0.7
+    )
+
     return {
-        "response": "You're doing great, keep going. Things will get better, I promise"
+        "prompt": prompt,
+        "response": completion.choices[0].message
     }
