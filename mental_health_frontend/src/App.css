@@ -7,6 +7,91 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        border: 1px solid #CDCED7;
+    }
+}
+
+
+
+@media (max-width: 450px) {
+    header {
+        text-align: center;
+        
+        h2 {
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+        }
+        
+        h4 {
+            padding-left: 1em;
+            padding-right: 1em;
+        }
+    }
+
+    .form-part {
+        margin: 0.5em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .journal-form {
+        
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0.25em;
+        border: 1px solid #CDCED7;
+        box-shadow: 3px 3px 3px #DdDdDd;
+
+        .text-input {
+            border: 1px solid #CDCED7;
+            box-shadow: 3px 3px 3px #DdDdDd;
+            border-radius: 5px;
+        }
+
+        .feeling-gauge {
+            margin-top: 0.5em;
+            width: 20em;
+            justify-content: space-around;
+            box-shadow: 3px 3px 3px #DdDdDd;
+        }
+
+        .option {
+            width: 10em;
+            padding-bottom: 0.25em;
+            padding-top: 0.25em;
+        }
+
+        .option:first-child {
+            border-radius: 5px 0 0 5px;
+        }
+
+        .option:last-child {
+            border-radius: 0 5px 5px 0;
+        }
+
+        textarea {
+            width: 30em;
+        }
+
+        .submit {
+            background:none;
+            border:none;
+            font-size:1em;
+            color:blue;
+        }
+    }
+
+    .footer {
+        top: 800px;
+    }
+}
+
+@media (max-width: 390px) {
+    .footer {
+        top: 700px;
     }
 }
 
@@ -19,5 +104,7 @@
 }
 
 .footer {
+    min-height: 50px;
     text-align: center;
+    position: absolute;
 }
