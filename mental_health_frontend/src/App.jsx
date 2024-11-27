@@ -53,15 +53,21 @@ function App() {
                 <div className="feeling-gauge">
                     {
                         [
-                            {feeling: -2, label: ":(("},
-                            {feeling: -1, label: ":("},
-                            {feeling: 0, label: ":|"},
-                            {feeling: 1, label: ":)"},
-                            {feeling: 2, label: ":))"},
+                            {feeling: -2, label: ":((", emotion: "very sad"},
+                            {feeling: -1, label: ":(", emotion: "sad"},
+                            {feeling: 0, label: ":|", emotion: "neutral or numb"},
+                            {feeling: 1, label: ":)", emotion: "happy"},
+                            {feeling: 2, label: ":))", emotion: "very happy"},
                         ].map((option, i) => 
                         <div key={i} className="option">
                             <label>{option.label}</label>
-                            <input type="radio" onChange={() => setFormData({...formData, feeling: option.feeling})} value={option.feeling} />                        
+                            <input 
+                                type="radio" 
+                                aria-label={option.emotion} 
+                                onChange={() => setFormData({...formData, feeling: option.feeling})} 
+                                value={option.feeling}
+                                checked={formData.feeling == option.feeling}
+                            />                        
                         </div>
                         )
                     }
