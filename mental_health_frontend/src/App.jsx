@@ -23,6 +23,19 @@ function App() {
         })
         const json = await data.json()
         setResults(json.response)
+
+        let pastEntries = JSON.parse(localStorage.getItem("past_entries")) || []
+
+        const newEntry = {
+            ...formData,
+            date: new Date().toLocaleDateString(),
+            response: json.response.content
+        }
+
+        pastEntries.push(newEntry)
+
+        localStorage.setItem("past_entries", JSON.stringify(pastEntries))
+
     }
 
     return (
