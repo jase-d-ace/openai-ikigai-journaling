@@ -22,19 +22,7 @@ function App() {
             body: JSON.stringify(formData)
         })
         const json = await data.json()
-        setResults(json.response)
-
-        let pastEntries = JSON.parse(localStorage.getItem("past_entries")) || [];
-
-        const newEntry = {
-            ...formData,
-            date: new Date().toLocaleDateString(),
-            response: json.response.content
-        }
-
-        pastEntries.push(newEntry)
-
-        localStorage.setItem("past_entries", JSON.stringify(pastEntries))
+        setResults(json)
 
     }
 
@@ -88,7 +76,7 @@ function App() {
             </form>
 
             <div className="results-container">
-                {results && results.content}
+                {results && results.answer}
             </div>
         </div>
     )
