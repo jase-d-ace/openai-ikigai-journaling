@@ -61,13 +61,24 @@ async def handle_entry(request: Request, db: Session = Depends(get_db)):
         content=req["content"],
         answer=completion.choices[0].message.content
     )
-    import pdb
-    pdb.set_trace()
 
     db.add(new_entry)
     db.commit()
     db.refresh(new_entry)
 
     return {
-        "response": new_entry
+        "id": new_entry.id,
+        "published_at": new_entry.published_at,
+        "title": new_entry.title,
+        "feeling": new_entry.feeling,
+        "content": new_entry.content,
+        "answer": new_entry.answer
+    }
+
+@app.get("/journals")
+def get_journals(db: Session = Depends(get_db)):
+    journals = db.query(models.Journal)
+
+    return {
+        "journals": journals.all()
     }
