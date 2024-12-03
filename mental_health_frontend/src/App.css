@@ -84,15 +84,15 @@
         }
     }
 
-    .footer {
+    /* .footer {
         top: 800px;
-    }
+    } */
 }
 
 @media (max-width: 390px) {
-    .footer {
+    /* .footer {
         top: 700px;
-    }
+    } */
 }
 
 .top-bar {

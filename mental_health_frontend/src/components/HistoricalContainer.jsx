@@ -1,16 +1,29 @@
+import { useState, useEffect } from "react";
+
 export default function HistoricalContainer() {
-    const pastEntries = JSON.parse(localStorage.getItem("past_entries")) || [];
+    const [pastEntries, setPastEntries] = useState([]);
+
+    useEffect(() => {
+        const dataFetch = async() => {
+            const data = await fetch("http://localhost:8000/journals");
+            const json = await data.json();
+            setPastEntries(json)
+        }
+
+        dataFetch()
+    }, []);
+    
     return (
         <div>
             {
-                pastEntries.length > 0 ?
-                pastEntries.map(entry => (
+                pastEntries.journals?.length > 0 ?
+                pastEntries.journals.map(entry => (
                     <div>
                         <h1>{entry.date}</h1>
                         {entry.title}
                         {entry.feeling}
-                        {entry.journal_entry}
-                        {entry.response}
+                        {entry.content}
+                        {entry.answer}
                     </div>
                 )) : 
                 <span> No entries yet! Go make some. </span>
