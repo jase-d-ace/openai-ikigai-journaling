@@ -82,7 +82,7 @@ function App() {
                 </div>
                 <div className="form-part journal-entry">
                     <label>Write your thoughts</label>
-                    <textarea className="text-input" required onChange={e => debounce("journal_entry", e.target.value, 500)} rows="10" cols="100"></textarea>
+                    <textarea className="text-input" required onChange={e => debounce("content", e.target.value, 500)} rows="10" cols="100"></textarea>
                 </div>
                 <input className="submit" type="submit" value="gogogo" />
             </form>
