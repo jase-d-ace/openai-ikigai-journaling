@@ -1,3 +1,6 @@
 fastapi[standard]==0.113.0
 openai
 sqlalchemy
+werkzeug
+psycopg2
+alembic
