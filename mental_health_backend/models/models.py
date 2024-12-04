@@ -1,9 +1,12 @@
-from ..db import Base
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, TIMESTAMP, Boolean, text, ForeignKey
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Session, relationship
 from werkzeug.security import generate_password_hash, check_password_hash
 import uuid
+
+
+Base = declarative_base()
 
 class Journal(Base):
     __tablename__ = "journals"

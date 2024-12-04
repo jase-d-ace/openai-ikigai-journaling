@@ -4,7 +4,8 @@ from openai import OpenAI
 from .schemas.journal import Journal
 from .models import models
 from .settings import OPENAI_API_KEY # if this apikey is on github, you're totally cooked. Please triple check settings has not been committed. Please.
-from .db import Base, engine, get_db
+from .db import engine, get_db
+from .models.models import Base
 from sqlalchemy.orm import Session
 import logging
 
@@ -72,7 +73,8 @@ async def handle_entry(request: Request, db: Session = Depends(get_db)):
         "title": new_entry.title,
         "feeling": new_entry.feeling,
         "content": new_entry.content,
-        "answer": new_entry.answer
+        "answer": new_entry.answer,
+        "user_id": "ab70d1c1-d1ce-485c-8c2e-786a9345ceff"
     }
 
 @app.get("/journals")
@@ -85,5 +87,18 @@ def get_journals(db: Session = Depends(get_db)):
 
 
 @app.post("/users/register")
-async def create_user(username: str, password: str, db: Session = Depends(get_db)):
-    db_user = db.query(models.User).filter(models.User.username == username).first()
+async def create_user(request: Request, db: Session = Depends(get_db)):
+    req = await request.json()
+    db_user = db.query(models.User).filter(models.User.username == req["username"]).first()
+    if db_user:
+        return {
+            "status": "already registered, but how did you get here?"
+        }
+    new_user = models.User(username=req["username"])
+    new_user.set_password(req["password"])
+    db.add(new_user)
+    db.commit()
+    return {
+        "username": new_user.username,
+        "id": new_user.id
+    }
