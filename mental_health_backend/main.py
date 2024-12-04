@@ -82,3 +82,8 @@ def get_journals(db: Session = Depends(get_db)):
     return {
         "journals": journals.all()
     }
+
+
+@app.post("/users/register")
+async def create_user(username: str, password: str, db: Session = Depends(get_db)):
+    db_user = db.query(models.User).filter(models.User.username == username).first()
