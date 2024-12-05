@@ -1,11 +1,9 @@
 from fastapi import FastAPI, Depends, Request
 from fastapi.middleware.cors import CORSMiddleware
 from openai import OpenAI
-from .schemas.journal import Journal
-from .models import models
+from .models.models import Journal, User, Base
 from .settings import OPENAI_API_KEY # if this apikey is on github, you're totally cooked. Please triple check settings has not been committed. Please.
 from .db import engine, get_db
-from .models.models import Base
 from sqlalchemy.orm import Session
 import logging
 
@@ -35,7 +33,7 @@ def read_root():
         "foo": "bar"
     }
 
-@app.post("/journal", response_model=Journal)
+@app.post("/journal")
 async def handle_entry(request: Request, db: Session = Depends(get_db)):
     req = await request.json()
 
@@ -56,11 +54,12 @@ async def handle_entry(request: Request, db: Session = Depends(get_db)):
         temperature=0.7
     )
 
-    new_entry = models.Journal(
+    new_entry = Journal(
         title=req["title"],
         feeling=req["feeling"],
         content=req["content"],
-        answer=completion.choices[0].message.content
+        answer=completion.choices[0].message.content,
+        user_id="shhhh it's a secret for now"
     )
 
     db.add(new_entry)
@@ -74,12 +73,11 @@ async def handle_entry(request: Request, db: Session = Depends(get_db)):
         "feeling": new_entry.feeling,
         "content": new_entry.content,
         "answer": new_entry.answer,
-        "user_id": "ab70d1c1-d1ce-485c-8c2e-786a9345ceff"
     }
 
 @app.get("/journals")
 def get_journals(db: Session = Depends(get_db)):
-    journals = db.query(models.Journal)
+    journals = db.query(Journal)
 
     return {
         "journals": journals.all()
@@ -89,16 +87,29 @@ def get_journals(db: Session = Depends(get_db)):
 @app.post("/users/register")
 async def create_user(request: Request, db: Session = Depends(get_db)):
     req = await request.json()
-    db_user = db.query(models.User).filter(models.User.username == req["username"]).first()
+    db_user = db.query(User).filter(User.username == req["username"]).first()
     if db_user:
         return {
-            "status": "already registered, but how did you get here?"
+            "status": 200,
+            "message": "this username is already taken",
+            "user": None
         }
-    new_user = models.User(username=req["username"])
+    new_user = User(username=req["username"])
     new_user.set_password(req["password"])
     db.add(new_user)
     db.commit()
     return {
-        "username": new_user.username,
-        "id": new_user.id
+        "status": 200,
+        "message": "ok",
+        "user": new_user
     }
+
+
+# @app.post("/users/login")
+# async def login(request: Request, db: Session = Depends(get_db)):
+#     req = await request.json()
+
+#     db_user = db.query(User).filter(User.username == req["username"]).first()
+
+#     if db_user:
+        
