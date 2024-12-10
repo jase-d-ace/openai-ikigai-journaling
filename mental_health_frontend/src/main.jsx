@@ -7,6 +7,7 @@ import App from './App.jsx'
 import Nav from "./components/Nav.jsx";
 import HistoricalContainer from './components/HistoricalContainer.jsx';
 import Login from "./components/Login.jsx";
+import Register from "./components/Register.jsx"
 import Footer from "./components/Footer.jsx";
 import TopBar from './components/TopBar.jsx';
 
@@ -20,6 +21,7 @@ createRoot(document.getElementById('root')).render(
                     <Route path="/" element={<App />} />
                     <Route path="/historical" element={<HistoricalContainer />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
                 </Routes>
                 <Footer />
             </BrowserRouter>
