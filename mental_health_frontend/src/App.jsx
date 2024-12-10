@@ -1,10 +1,10 @@
+import { Navigate } from "react-router-dom";
 import { useState, useContext } from 'react';
 import { AuthContext } from "./authContext.jsx";
 import './App.css'
 
 function App() {
-    const testState = useContext(AuthContext);
-    console.log(testState)
+    const context = useContext(AuthContext);
     const [formData, setFormData] = useState({})
     const [results, setResults] = useState(null)
 
@@ -30,13 +30,14 @@ function App() {
     }
 
     return (
+        context.currentUser.isLoggedIn ? 
         <div>
             <header>
                 <h2>
                     Today's Journal Entry
                 </h2>
                 <h4>
-                    Tell us how you're feeling, then write some notes, and hear something uplifting from GPT :)
+                    Tell us how you're feeling, {context.currentUser.user?.username}, then write some notes, and hear something uplifting from GPT :)
                 </h4>
             </header>
             <form className="journal-form" onSubmit={handleFormSubmit}>
@@ -81,7 +82,8 @@ function App() {
             <div className="results-container">
                 {results && results.answer}
             </div>
-        </div>
+        </div> :
+        <Navigate replace to="/login" />
     )
 }
 
