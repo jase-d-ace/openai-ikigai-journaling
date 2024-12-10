@@ -1,13 +1,17 @@
 import React, { createContext, useState } from "react";
 
 export const AuthContext = createContext({
-    user: null,
-    isLoggedIn: false,
-    token: "shhhhsecrettoken"
+    user: {},
+    isLoggedIn: true,
+    token: ""
 });
 
 export const AuthProvider = ({ children }) => {
-    const [currentUser, setCurrentUser] = useState(null);
+    const [currentUser, setCurrentUser] = useState({
+        user: {},
+        isLoggedIn: true,
+        token: ""
+    });
 
     const login = async (username, password) => {
         const res = await fetch("http://localhost:8000/users/login", {
@@ -25,16 +29,25 @@ export const AuthProvider = ({ children }) => {
 
         if (response.ok) {
             setCurrentUser({
-                username,
-                token: json.access_token
+                user: json.user,
+                token: json.access_token,
+                isLoggedIn: true,
             })
         } else {
-            setCurrentUser(null)
+            setCurrentUser({
+                user: {},
+                isLoggedIn: false,
+                token: ""
+            })
         }
     }
 
     const logout = () => {
-        setCurrentUser(null);
+        setCurrentUser({
+            user: {},
+            isLoggedIn: false,
+            token: ""
+        });
     }
 
     return (
