@@ -8,7 +8,7 @@ export default function TopBar() {
     return (
         <div className="top-bar">
             <h3>Mental Health Journaling</h3>
-            {context.isLoggedIn ? <h4>You are welcome here</h4> : <h4><Link to="/login">Login</Link></h4>}
+            {context.currentUser.isLoggedIn ? <h4>You are welcome here</h4> : <h4><Link to="/login">Login</Link></h4>}
         </div>
     )
 }

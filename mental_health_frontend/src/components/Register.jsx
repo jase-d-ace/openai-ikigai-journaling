@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function Register() {
     return (
-        <div class="register">
+        <div className="register">
             <h1>Create an Account</h1>
             <form>
                 <label>username</label>

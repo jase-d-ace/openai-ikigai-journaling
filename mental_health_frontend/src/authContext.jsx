@@ -1,15 +1,16 @@
-import React, { createContext, useState } from "react";
+import { createContext, useState } from "react";
+import { Navigate } from "react-router-dom";
 
 export const AuthContext = createContext({
-    user: {},
-    isLoggedIn: true,
+    user: "",
+    isLoggedIn: false,
     token: ""
 });
 
 export const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState({
         user: {},
-        isLoggedIn: true,
+        isLoggedIn: false,
         token: ""
     });
 
@@ -27,15 +28,17 @@ export const AuthProvider = ({ children }) => {
 
         const json = await res.json();
 
-        if (response.ok) {
+        if (json.status == 200) {
             setCurrentUser({
                 user: json.user,
                 token: json.access_token,
                 isLoggedIn: true,
             })
+
+            localStorage.setItem("user_token", json.access_token)
         } else {
             setCurrentUser({
-                user: {},
+                user: "",
                 isLoggedIn: false,
                 token: ""
             })
@@ -44,7 +47,7 @@ export const AuthProvider = ({ children }) => {
 
     const logout = () => {
         setCurrentUser({
-            user: {},
+            user: "",
             isLoggedIn: false,
             token: ""
         });

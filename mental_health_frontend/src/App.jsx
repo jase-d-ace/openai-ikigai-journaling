@@ -30,7 +30,7 @@ function App() {
     }
 
     return (
-        context.currentUser.isLoggedIn ? 
+        localStorage.getItem("user_token") ? 
         <div>
             <header>
                 <h2>
