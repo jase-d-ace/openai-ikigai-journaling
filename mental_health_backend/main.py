@@ -1,16 +1,20 @@
-from fastapi import FastAPI, Depends, Request
+from fastapi import FastAPI, Depends, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from openai import OpenAI
 from .models.models import Journal, User, Base
-from .settings import OPENAI_API_KEY # if this apikey is on github, you're totally cooked. Please triple check settings has not been committed. Please.
+from datetime import datetime, timedelta
+from .settings import OPENAI_API_KEY, SECRET_KEY # if this apikey is on github, you're totally cooked. Please triple check settings has not been committed. Please.
 from .db import engine, get_db
 from sqlalchemy.orm import Session
+from jose import jwt
 import logging
 
 app = FastAPI()
 client = OpenAI(api_key=OPENAI_API_KEY)
 Base.metadata.create_all(bind=engine)
 
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRY = 30
 
 origins = [
     "http://localhost:3000",
@@ -25,6 +29,18 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+def create_access_token(data: dict, expires_delta: timedelta = None):
+    to_encode = data.copy()
+    if expires_delta:
+        expire = datetime.now() + expires_delta
+    else:
+        expire = datetime.now() + timedelta(minutes=15)
+
+    to_encode.update({"exp": expire})
+    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+
+    return encoded_jwt
 
 @app.get("/")
 def read_root():
@@ -105,11 +121,22 @@ async def create_user(request: Request, db: Session = Depends(get_db)):
     }
 
 
-# @app.post("/users/login")
-# async def login(request: Request, db: Session = Depends(get_db)):
-#     req = await request.json()
+@app.post("/users/login")
+async def login(request: Request, db: Session = Depends(get_db)):
+    req = await request.json()
 
-#     db_user = db.query(User).filter(User.username == req["username"]).first()
+    db_user = db.query(User).filter(User.username == req["username"]).first()
 
-#     if db_user:
-        
+    if not db_user or not db_user.check_password(req["password"]):
+        return {
+            "status": 403,
+            "message": "Incorrect username or password",
+            "user": None
+        }
+    
+    access_token_expires = timedelta(ACCESS_TOKEN_EXPIRY)
+    access_token = create_access_token(
+        data={"sub": db_user.username}, expires_delta=access_token_expires
+    )
+
+    return {"access_token": access_token, "token_type": "bearer"}
