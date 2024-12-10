@@ -1,7 +1,10 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react';
+import { AuthContext } from "./authContext.jsx";
 import './App.css'
 
 function App() {
+    const testState = useContext(AuthContext);
+    console.log(testState)
     const [formData, setFormData] = useState({})
     const [results, setResults] = useState(null)
 
