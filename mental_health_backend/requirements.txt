@@ -4,3 +4,4 @@ sqlalchemy
 werkzeug
 psycopg2
 alembic
+python-jose
