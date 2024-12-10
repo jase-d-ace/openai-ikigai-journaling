@@ -130,6 +130,8 @@ async def login(request: Request, db: Session = Depends(get_db)):
     if not db_user or not db_user.check_password(req["password"]):
         return {
             "status": 403,
+            "access_token": None,
+            "token_type": "",
             "message": "Incorrect username or password",
             "user": None
         }
@@ -139,4 +141,10 @@ async def login(request: Request, db: Session = Depends(get_db)):
         data={"sub": db_user.username}, expires_delta=access_token_expires
     )
 
-    return {"access_token": access_token, "user": db_user.username, "token_type": "bearer"}
+    return {
+        "status": 200,
+        "access_token": access_token, 
+        "user": db_user.username, 
+        "token_type": "bearer",
+        "message": "ok"
+    }
