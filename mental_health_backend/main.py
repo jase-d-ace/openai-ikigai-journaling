@@ -128,7 +128,7 @@ async def register(request: Request, db: Session = Depends(get_db)):
     access_token = create_access_token(
         data={"sub": new_user.username}, expires_delta=access_token_expires
     )
-    return user_response(200, new_user.username, access_token)
+    return user_response(200, {"username": new_user.username, "id": new_user.id}, access_token)
 
 
 @app.post("/users/login")
@@ -145,4 +145,4 @@ async def login(request: Request, db: Session = Depends(get_db)):
         data={"sub": db_user.username}, expires_delta=access_token_expires
     )
 
-    return user_response(200, db_user.username, access_token)
+    return user_response(200, {"username": db_user.username, "id": db_user.id}, access_token)
