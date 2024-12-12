@@ -36,14 +36,11 @@ function App() {
                 <h2>
                     Today's Journal Entry
                 </h2>
-                <h4>
-                    Tell us how you're feeling then write some notes, and hear something uplifting from GPT :)
-                </h4>
             </header>
             <form className="journal-form" onSubmit={handleFormSubmit}>
                 <div className="form-part title">
                     <label>Title</label>
-                    <input className="text-input" required type="text" placeholder="title" onChange={e => debounce("title", e.target.value, 500)} />
+                    <input className="text-input title-input" required type="text" placeholder="title" onChange={e => debounce("title", e.target.value, 500)} />
                 </div>
                 <div className="form-part feelings">
                     <label>How are you feeling?</label>
@@ -60,13 +57,12 @@ function App() {
                                 <label>{option.label}</label>
                                 <input 
                                     required
-                                    className="submit"
+                                    className="radio"
                                     type="radio" 
-                                    aria-label={option.emotion} 
                                     onChange={() => setFormData({...formData, feeling: option.feeling})} 
                                     value={option.feeling}
                                     checked={formData.feeling == option.feeling}
-                                />                        
+                                />
                             </div>
                             )
                         }

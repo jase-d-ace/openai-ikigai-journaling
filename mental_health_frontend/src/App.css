@@ -15,52 +15,60 @@
 
 @media (max-width: 450px) {
     header {
-        text-align: center;
+        text-align: left;
         
         h2 {
-            margin-top: 0.5em;
-            margin-bottom: 0.5em;
+            margin: 0.5em;
         }
         
-        h4 {
-            padding-left: 1em;
-            padding-right: 1em;
-        }
     }
 
     .form-part {
         margin: 0.5em;
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
     }
 
     .journal-form {
         
         border-radius: 5px;
+        background: #F5F5F8;
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
         margin: 0.25em;
         border: 1px solid #CDCED7;
         box-shadow: 3px 3px 3px #DdDdDd;
+
+        .title-input {
+            height: 2.5em;
+            width: 29em;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 0.25em;
+        }
 
         .text-input {
             border: 1px solid #CDCED7;
             box-shadow: 3px 3px 3px #DdDdDd;
             border-radius: 5px;
+            max-width: 30em;
         }
 
         .feeling-gauge {
             margin-top: 0.5em;
-            width: 20em;
+            width: 24.7em;
             justify-content: space-around;
             box-shadow: 3px 3px 3px #DdDdDd;
         }
 
         .option {
+            height: 2.5em;
             width: 10em;
-            padding-bottom: 0.25em;
+            padding-bottom: 0.8em;
             padding-top: 0.25em;
         }
 
@@ -77,22 +85,20 @@
         }
 
         .submit {
-            background:none;
-            border:none;
+            background: #F5F5F8;
+            border: 1px solid #CDCED7;
+            box-shadow: 3px 3px 3px #DdDdDd;
+            border-radius: 5px;
             font-size:1em;
-            color:blue;
+            align-self: center;
+            height: 2em;
+            width: 25em;
+            margin-top: 0.5em;
+            margin-bottom: 1em;
         }
     }
 
-    /* .footer {
-        top: 800px;
-    } */
-}
 
-@media (max-width: 390px) {
-    /* .footer {
-        top: 700px;
-    } */
 }
 
 .top-bar {
