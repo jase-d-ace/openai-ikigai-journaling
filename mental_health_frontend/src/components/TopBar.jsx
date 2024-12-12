@@ -2,12 +2,18 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../authContext";
 
 export default function TopBar() {
-    const { currentUser } = useAuth();
+    const { currentUser, logout } = useAuth();
 
     return (
         <div className="top-bar">
             <h3>Mental Health Journaling</h3>
-            {currentUser.isLoggedIn ? <h4>Welcome, {currentUser.user}</h4> : <h4><Link to="/login">Login</Link></h4>}
+            {currentUser.isLoggedIn ? 
+            <div className="user-info"> 
+                <strong>Welcome, {currentUser.user} </strong> 
+                <span onClick={logout}>Log Out</span>
+            </div>
+            : 
+            <h4><Link to="/login">Login</Link></h4>}
         </div>
     )
 }
