@@ -47,7 +47,7 @@ def user_response(status, user, token, token_type="bearer", message="ok"):
     return {
         "status": status,
         "user": user,
-        "token": token,
+        "access_token": token,
         "token_type": token_type,
         "message": message
     }
@@ -145,3 +145,17 @@ async def login(request: Request, db: Session = Depends(get_db)):
     )
 
     return user_response(200, {"username": db_user.username, "id": db_user.id}, access_token)
+
+
+@app.get("/users/token")
+def login_via_token(token: str, db: Session = Depends(get_db)):
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=ALGORITHM)
+        username = payload.get("sub")
+    except:
+        # import pdb
+        # pdb.set_trace()
+        return user_response(400, None, None, token_type="", message="Malformed Token")
+    user = db.query(User).filter(User.username == username).first()
+
+    return user_response(200, {"username": user.username, "id": user.id}, token)
