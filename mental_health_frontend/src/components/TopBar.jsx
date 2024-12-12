@@ -2,12 +2,16 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../authContext";
 
 export default function TopBar() {
-    const { currentUser, logout } = useAuth();
+    const { currentUser, logout, loginWithToken } = useAuth();
+
+    if (localStorage.getItem("user_token") && !currentUser.isLoggedIn) {
+        loginWithToken();
+    }
 
     return (
         <div className="top-bar">
             <h3>Mental Health Journaling</h3>
-            {currentUser.isLoggedIn ? 
+            {currentUser.isLoggedIn || localStorage.getItem("user_token") ? 
             <div className="user-info"> 
                 <strong>Welcome, {currentUser.user.username} </strong> 
                 <span onClick={logout}>Log Out</span>

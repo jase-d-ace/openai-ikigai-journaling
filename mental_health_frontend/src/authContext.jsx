@@ -98,8 +98,29 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    const loginWithToken = async () => {
+        const data = await fetch(`http://localhost:8000/users/token?token=${localStorage.getItem("user_token")}`);
+        const json = await data.json();
+
+        if (json.status == 200) {
+            setCurrentUser({
+                user: json.user,
+                token: json.access_token,
+                isLoggedIn: true
+            })
+        } else {
+            setCurrentUser({
+                user: {},
+                isLoggedIn: false,
+                token: "",
+                error: json.message
+            })
+        }
+        return false;
+    }
+
     return (
-        <AuthContext.Provider value={{ currentUser, login, logout, register }}>
+        <AuthContext.Provider value={{ currentUser, login, logout, register, loginWithToken }}>
             {children}
         </AuthContext.Provider>
     )
