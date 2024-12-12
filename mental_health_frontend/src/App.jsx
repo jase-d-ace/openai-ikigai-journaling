@@ -1,10 +1,10 @@
 import { Navigate } from "react-router-dom";
-import { useState, useContext } from 'react';
-import { AuthContext } from "./authContext.jsx";
+import { useState } from 'react';
+import { useAuth } from "./authContext.jsx";
 import './App.css'
 
 function App() {
-    const context = useContext(AuthContext);
+    const { currentUser } = useAuth();
     const [formData, setFormData] = useState({})
     const [results, setResults] = useState(null)
 
@@ -37,7 +37,7 @@ function App() {
                     Today's Journal Entry
                 </h2>
                 <h4>
-                    Tell us how you're feeling, {context.currentUser.user?.username}, then write some notes, and hear something uplifting from GPT :)
+                    Tell us how you're feeling, {currentUser.user?.username ? `${currentUser.user.username},` : ""} then write some notes, and hear something uplifting from GPT :)
                 </h4>
             </header>
             <form className="journal-form" onSubmit={handleFormSubmit}>

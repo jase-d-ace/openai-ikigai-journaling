@@ -1,10 +1,7 @@
-import { useContext } from "react";
-import { AuthContext } from "../authContext.jsx";
 import { Link, useLocation } from 'react-router-dom';
 
 export default function Nav() {
     const location = useLocation();
-    const context = useContext(AuthContext)
 
     return (
         localStorage.getItem("user_token") &&

@@ -1,7 +1,6 @@
-import { createContext, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { createContext, useState, useContext } from "react";
 
-export const AuthContext = createContext({
+const AuthContext = createContext({
     user: "",
     isLoggedIn: false,
     token: ""
@@ -59,3 +58,5 @@ export const AuthProvider = ({ children }) => {
         </AuthContext.Provider>
     )
 }
+
+export const useAuth = () => useContext(AuthContext)
