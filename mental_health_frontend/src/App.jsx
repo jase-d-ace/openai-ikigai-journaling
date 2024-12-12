@@ -6,6 +6,7 @@ import './App.css'
 function App() {
     const [formData, setFormData] = useState({})
     const [results, setResults] = useState(null)
+    const { currentUser } = useAuth();
 
     const debounce = (name, query, interval) => {
         setTimeout(() => {
@@ -29,7 +30,7 @@ function App() {
     }
 
     return (
-        localStorage.getItem("user_token") ? 
+        currentUser.isLoggedIn || localStorage.getItem("user_token") ? 
         <div>
             <header>
                 <h2>
