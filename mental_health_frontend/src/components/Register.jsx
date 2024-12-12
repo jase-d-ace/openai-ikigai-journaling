@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../authContext";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 export default function Register() {
     const { register } = useAuth();
@@ -21,6 +21,8 @@ export default function Register() {
     }
 
     return (
+        localStorage.getItem("user_token") ?
+        <Navigate replace to="/" /> :
         <div className="register">
             <h1>Create an Account</h1>
             <form onSubmit={handleFormSubmit}>
