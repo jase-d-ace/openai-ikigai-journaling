@@ -4,7 +4,7 @@ import { useAuth } from "../authContext";
 
 export default function Login() {
     const [loginFormData, setLoginFormData] = useState({})
-    const { currentUser } = useAuth()
+    const { login } = useAuth()
 
     const handleFormInput = (name, text) => {
         setLoginFormData({...loginFormData, [name]: text})
@@ -12,7 +12,7 @@ export default function Login() {
 
     const handleFormSubmit = async e => {
         e.preventDefault();
-        await context.login(loginFormData.username, loginFormData.password)
+        await login(loginFormData.username, loginFormData.password)
 
     }
 
