@@ -30,7 +30,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-def create_access_token(data: dict, expires_delta: timedelta = None):
+def create_access_token(data: dict, expires_delta: timedelta = None,):
     to_encode = data.copy()
     if expires_delta:
         expire = datetime.now() + expires_delta
@@ -41,6 +41,17 @@ def create_access_token(data: dict, expires_delta: timedelta = None):
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
     return encoded_jwt
+
+
+def user_response(status, user, token, token_type="bearer", message="ok"):
+    return {
+        "status": status,
+        "user": user,
+        "token": token,
+        "token_type": token_type,
+        "message": message
+    }
+
 
 @app.get("/")
 def read_root():
@@ -101,24 +112,22 @@ def get_journals(db: Session = Depends(get_db)):
 
 
 @app.post("/users/register")
-async def create_user(request: Request, db: Session = Depends(get_db)):
+async def register(request: Request, db: Session = Depends(get_db)):
     req = await request.json()
     db_user = db.query(User).filter(User.username == req["username"]).first()
     if db_user:
-        return {
-            "status": 200,
-            "message": "this username is already taken",
-            "user": None
-        }
+        return user_response(400, None, None, token_type="", message="Unable to create this user")
+
     new_user = User(username=req["username"])
     new_user.set_password(req["password"])
     db.add(new_user)
     db.commit()
-    return {
-        "status": 200,
-        "message": "ok",
-        "user": new_user
-    }
+
+    access_token_expires = timedelta(ACCESS_TOKEN_EXPIRY)
+    access_token = create_access_token(
+        data={"sub": db_user.username}, expires_delta=access_token_expires
+    )
+    return user_response(200, db_user.username, access_token)
 
 
 @app.post("/users/login")
@@ -128,23 +137,11 @@ async def login(request: Request, db: Session = Depends(get_db)):
     db_user = db.query(User).filter(User.username == req["username"]).first()
 
     if not db_user or not db_user.check_password(req["password"]):
-        return {
-            "status": 403,
-            "access_token": None,
-            "token_type": "",
-            "message": "Incorrect username or password",
-            "user": None
-        }
+        return user_response(400, None, None, token_type="", message="Incorrect username or password")
     
     access_token_expires = timedelta(ACCESS_TOKEN_EXPIRY)
     access_token = create_access_token(
         data={"sub": db_user.username}, expires_delta=access_token_expires
     )
 
-    return {
-        "status": 200,
-        "access_token": access_token, 
-        "user": db_user.username, 
-        "token_type": "bearer",
-        "message": "ok"
-    }
+    return user_response(200, db_user.username, access_token)
