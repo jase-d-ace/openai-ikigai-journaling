@@ -86,7 +86,6 @@ async def handle_entry(request: Request, db: Session = Depends(get_db)):
         feeling=req["feeling"],
         content=req["content"],
         answer=completion.choices[0].message.content,
-        user_id="shhhh it's a secret for now"
     )
 
     db.add(new_entry)
@@ -103,8 +102,8 @@ async def handle_entry(request: Request, db: Session = Depends(get_db)):
     }
 
 @app.get("/journals")
-def get_journals(db: Session = Depends(get_db)):
-    journals = db.query(Journal)
+def get_journals(id: str, db: Session = Depends(get_db)):
+    journals = db.query(Journal).filter(Journal.user_id == id)
 
     return {
         "journals": journals.all()
