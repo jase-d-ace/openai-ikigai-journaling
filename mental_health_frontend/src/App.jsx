@@ -5,9 +5,7 @@ import './App.css'
 
 function App() {
     const [formData, setFormData] = useState({})
-    const [results, setResults] = useState({
-        answer: "butts"
-    })
+    const [results, setResults] = useState(null)
     const { currentUser } = useAuth();
 
     const debounce = (name, query, interval) => {
@@ -55,16 +53,12 @@ function App() {
                                 {feeling: 1, label: ":)"},
                                 {feeling: 2, label: ":))"},
                             ].map((option, i) => 
-                            <div key={i} className="option">
-                                <label>{option.label}</label>
-                                <input 
-                                    required
-                                    className="radio"
-                                    type="radio" 
-                                    onChange={() => setFormData({...formData, feeling: option.feeling})} 
-                                    value={option.feeling}
-                                    checked={formData.feeling == option.feeling}
-                                />
+                            <div key={i} className={`option ${formData.feeling == option.feeling ? "selected" : ""}`} onClick={() => setFormData({...formData, feeling: option.feeling})}>
+                                <div 
+                                    className="option-button"
+                                >
+                                    {option.label}
+                                </div>
                             </div>
                             )
                         }

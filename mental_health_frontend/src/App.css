@@ -70,6 +70,15 @@
             width: 10em;
             padding-bottom: 0.8em;
             padding-top: 0.25em;
+            cursor: pointer;
+            
+            .option-button {
+                padding-top: 0.5em;
+            }
+        }
+
+        .selected {
+            background: #B3F2FF;
         }
 
         .option:first-child {
@@ -99,12 +108,16 @@
     }
 
     .results-container {
+        background: #F5F5F8;
+        border: 1px solid #CDCED7;
+        box-shadow: 3px 3px 3px #DdDdDd;
+        border-radius: 5px;
         margin-left: 0.25em;
-        border: 1px solid red;
         height: 15.5em;
         width: 26em;
         overflow-y: scroll;
     }
+
 
 
 }
