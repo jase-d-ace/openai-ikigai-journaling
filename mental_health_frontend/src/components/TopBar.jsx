@@ -9,7 +9,7 @@ export default function TopBar() {
             <h3>Mental Health Journaling</h3>
             {currentUser.isLoggedIn ? 
             <div className="user-info"> 
-                <strong>Welcome, {currentUser.user} </strong> 
+                <strong>Welcome, {currentUser.user.username} </strong> 
                 <span onClick={logout}>Log Out</span>
             </div>
             : 

@@ -1,7 +1,7 @@
 import { createContext, useState, useContext } from "react";
 
 const AuthContext = createContext({
-    user: "",
+    user: {},
     isLoggedIn: false,
     token: "",
     error: "Something went wrong"
@@ -9,7 +9,7 @@ const AuthContext = createContext({
 
 export const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState({
-        user: "",
+        user: {},
         isLoggedIn: false,
         token: "",
         error: ""
@@ -49,7 +49,7 @@ export const AuthProvider = ({ children }) => {
 
     const logout = () => {
         setCurrentUser({
-            user: "",
+            user: {},
             isLoggedIn: false,
             token: "",
             error: ""
@@ -60,7 +60,7 @@ export const AuthProvider = ({ children }) => {
     const register = async (username, password, confirm) => {
         if (password !== confirm) {
             setCurrentUser({
-                user: "",
+                user: {},
                 isLoggedIn: false,
                 token: "",
                 error: "Passwords must match"
@@ -90,7 +90,7 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem("user_token", json.access_token)
         } else {
             setCurrentUser({
-                user: "",
+                user: {},
                 isLoggedIn: false,
                 token: "",
                 error: json.message
