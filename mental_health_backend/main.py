@@ -114,6 +114,7 @@ def get_journals(db: Session = Depends(get_db)):
 @app.post("/users/register")
 async def register(request: Request, db: Session = Depends(get_db)):
     req = await request.json()
+
     db_user = db.query(User).filter(User.username == req["username"]).first()
     if db_user:
         return user_response(400, None, None, token_type="", message="Unable to create this user")
@@ -125,9 +126,9 @@ async def register(request: Request, db: Session = Depends(get_db)):
 
     access_token_expires = timedelta(ACCESS_TOKEN_EXPIRY)
     access_token = create_access_token(
-        data={"sub": db_user.username}, expires_delta=access_token_expires
+        data={"sub": new_user.username}, expires_delta=access_token_expires
     )
-    return user_response(200, db_user.username, access_token)
+    return user_response(200, new_user.username, access_token)
 
 
 @app.post("/users/login")
