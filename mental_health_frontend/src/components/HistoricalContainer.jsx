@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
+import { useAuth } from "../authContext";
 
 export default function HistoricalContainer() {
     const [pastEntries, setPastEntries] = useState([]);
+    const { currentUser } = useAuth();
 
     useEffect(() => {
         const dataFetch = async() => {
-            const data = await fetch("http://localhost:8000/journals");
+            const data = await fetch(`http://localhost:8000/journals?id=${currentUser.user.id}`);
             const json = await data.json();
             setPastEntries(json)
         }
