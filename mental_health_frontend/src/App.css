@@ -22,15 +22,15 @@
         }
         
     }
-
-    .form-part {
-        margin: 0.5em;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
+    
     .journal-form {
+        
+        .form-part {
+            margin: 0.5em;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
         
         border-radius: 5px;
         background: #F5F5F8;
@@ -96,6 +96,14 @@
             margin-top: 0.5em;
             margin-bottom: 1em;
         }
+    }
+
+    .results-container {
+        margin-left: 0.25em;
+        border: 1px solid red;
+        height: 15.5em;
+        width: 26em;
+        overflow-y: scroll;
     }
 
 

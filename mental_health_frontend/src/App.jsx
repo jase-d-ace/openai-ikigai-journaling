@@ -5,7 +5,9 @@ import './App.css'
 
 function App() {
     const [formData, setFormData] = useState({})
-    const [results, setResults] = useState(null)
+    const [results, setResults] = useState({
+        answer: "butts"
+    })
     const { currentUser } = useAuth();
 
     const debounce = (name, query, interval) => {
@@ -22,7 +24,7 @@ function App() {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(formData)
+            body: JSON.stringify({...formData, user_id: currentUser.user.id})
         })
         const json = await data.json()
         setResults(json)
@@ -31,7 +33,7 @@ function App() {
 
     return (
         currentUser.isLoggedIn || localStorage.getItem("user_token") ? 
-        <div>
+        <div className="todays-entry">
             <header>
                 <h2>
                     Today's Journal Entry
@@ -75,9 +77,12 @@ function App() {
                 <input className="submit" type="submit" value="gogogo" />
             </form>
 
-            <div className="results-container">
-                {results && results.answer}
-            </div>
+            {
+                results &&
+                <div className="results-container">
+                    {results.answer}
+                </div>
+            }
         </div> :
         <Navigate replace to="/login" />
     )

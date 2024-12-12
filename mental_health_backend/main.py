@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends, Request, HTTPException
+from fastapi import FastAPI, Depends, Request, Header
 from fastapi.middleware.cors import CORSMiddleware
 from openai import OpenAI
 from .models.models import Journal, User, Base
@@ -30,7 +30,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-def create_access_token(data: dict, expires_delta: timedelta = None,):
+def create_access_token(data: dict, expires_delta: timedelta = None):
     to_encode = data.copy()
     if expires_delta:
         expire = datetime.now() + expires_delta
@@ -86,6 +86,7 @@ async def handle_entry(request: Request, db: Session = Depends(get_db)):
         feeling=req["feeling"],
         content=req["content"],
         answer=completion.choices[0].message.content,
+        user_id=req["user_id"]
     )
 
     db.add(new_entry)
