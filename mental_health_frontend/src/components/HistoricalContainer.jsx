@@ -7,16 +7,16 @@ export default function HistoricalContainer() {
     const [pastEntries, setPastEntries] = useState([]);
     const { currentUser } = useAuth();
 
-    useEffect(() => {
-        const dataFetch = async() => {
+    if (currentUser.isLoggedIn) {
+        const dataFetch = async () => {
             const data = await fetch(`http://localhost:8000/journals?id=${currentUser.user.id}`);
             const json = await data.json();
             setPastEntries(json)
         }
 
-        dataFetch()
-    }, []);
-    
+        dataFetch();
+    }
+
     return (
         <div className="past-entries">
             <header>
