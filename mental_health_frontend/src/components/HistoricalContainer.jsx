@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { Navigate } from "react-router-dom";
+import { useState } from "react";
 import { useAuth } from "../authContext";
 import JournalEntry from "./JournalEntry";
 import "../App.css";
@@ -18,6 +19,7 @@ export default function HistoricalContainer() {
     }
 
     return (
+        currentUser.isLoggedIn ? 
         <div className="past-entries">
             <header>
                 <h2>Your Entries</h2>
@@ -31,6 +33,7 @@ export default function HistoricalContainer() {
                     <span> No entries yet! Go make some. </span>
                 }
             </div>
-        </div>
+        </div> :
+        <Navigate replace to="/login" />
     )
 }
