@@ -16,11 +16,12 @@ export default function JournalEntry({ published_at, title, feeling, content, an
                 <p className="emotion"> You felt <strong>{feelingsMap[feeling]}</strong> </p>
             </div>
             <div className="entry">
-                <span>{content}</span>                
+                <strong>You wrote...</strong>
+                <p>{content}</p>                
             </div>
             <div className="answer">
                 <strong> GPT-4o-mini said... </strong>
-                <span>{answer}</span>
+                <p>{answer}</p>
             </div>
         </div>
     )
