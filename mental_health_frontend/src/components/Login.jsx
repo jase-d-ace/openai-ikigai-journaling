@@ -1,10 +1,14 @@
 import { Link, Navigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../authContext";
+import "../App.css";
 
 export default function Login() {
-    const [loginFormData, setLoginFormData] = useState({})
-    const { login } = useAuth()
+    const [loginFormData, setLoginFormData] = useState({
+        username: "",
+        password: "",
+    })
+    const { currentUser, login } = useAuth()
 
     const handleFormInput = (name, text) => {
         setLoginFormData({...loginFormData, [name]: text})
@@ -12,25 +16,32 @@ export default function Login() {
 
     const handleFormSubmit = async e => {
         e.preventDefault();
-        await login(loginFormData.username, loginFormData.password)
-
+        await login(loginFormData.username, loginFormData.password);
     }
 
     return (
-        localStorage.getItem("user_token") ? 
+        currentUser.isLoggedIn ? 
         <Navigate replace to="/" /> :
         <div className="login">
-            <h1>Log in to start journaling</h1>
+            <header>
+                <h2>Log in to start journaling</h2>
+            </header>
 
-            <form onSubmit={handleFormSubmit}>
-                <label>Username</label>
-                <input type="text" onChange={e => handleFormInput("username", e.target.value)} />
-                <label>Password</label>
-                <input type="password" onChange={e => handleFormInput("password", e.target.value)} />
-                <input type="submit" />
+            <form className="login-form" onSubmit={handleFormSubmit}>
+                <div className="field username-field">
+                    <label>Username</label>
+                    <input className="login-text-input" type="text" onChange={e => handleFormInput("username", e.target.value)} />
+                </div>
+                <div className="field password-field">
+                    <label>Password</label>
+                    <input className="login-text-input" type="password" onChange={e => handleFormInput("password", e.target.value)} />
+                </div>
+                <div className="field submit">
+                    <input className="login-submit" value="Sign In" type="submit" />
+                </div>
             </form>
 
-            <span>Don't have an account? <Link to="/register">Create one</Link></span>
+            <span className="register-link">Don't have an account? <Link to="/register">Create one</Link></span>
         </div> 
     )
 
