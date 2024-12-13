@@ -15,11 +15,11 @@ export default function JournalEntry({ published_at, title, feeling, content, an
                 <strong>{ new Date(published_at).toLocaleDateString() } - {title} </strong>
                 <p className="emotion"> You felt <strong>{feelingsMap[feeling]}</strong> </p>
             </div>
-            <div className="entry">
+            <div className="entry-text entry">
                 <strong>You wrote...</strong>
                 <p>{content}</p>                
             </div>
-            <div className="answer">
+            <div className="entry-text answer">
                 <strong> GPT-4o-mini said... </strong>
                 <p>{answer}</p>
             </div>

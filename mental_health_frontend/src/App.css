@@ -161,7 +161,7 @@ header {
         border: 1px solid #CDCED7;
         box-shadow: 3px 3px 3px #DdDdDd;
         border-radius: 5px;
-        width: 90em;
+        width: 70em;
     }
 
     .feeling-gauge {
@@ -410,12 +410,12 @@ header {
             border: 1px solid #CDCED7;
             box-shadow: 3px 3px 3px #DdDdDd;
             border-radius: 5px;
-            max-width: 30em;
+            width: 26em;
         }
 
         .feeling-gauge {
             margin-top: 0.5em;
-            width: 24.7em;
+            width: 23em;
             justify-content: space-around;
             box-shadow: 3px 3px 3px #DdDdDd;
         }
@@ -456,7 +456,7 @@ header {
             font-size:1em;
             align-self: center;
             height: 2em;
-            width: 25em;
+            width: 22em;
             margin-top: 0.5em;
             margin-bottom: 1em;
         }
