@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../authContext";
+import JournalEntry from "./JournalEntry";
+import "../App.css";
 
 export default function HistoricalContainer() {
     const [pastEntries, setPastEntries] = useState([]);
@@ -16,20 +18,19 @@ export default function HistoricalContainer() {
     }, []);
     
     return (
-        <div>
-            {
-                pastEntries.journals?.length > 0 ?
-                pastEntries.journals.map(entry => (
-                    <div>
-                        <h1>{entry.date}</h1>
-                        {entry.title}
-                        {entry.feeling}
-                        {entry.content}
-                        {entry.answer}
-                    </div>
-                )) : 
-                <span> No entries yet! Go make some. </span>
-            }
+        <div className="past-entries">
+            <header>
+                <h2>Your Entries</h2>
+            </header>
+            <div className="entries">
+                {
+                    pastEntries.journals?.length > 0 ?
+                    pastEntries.journals.map(entry => (
+                        <JournalEntry {...entry} />
+                    )) : 
+                    <span> No entries yet! Go make some. </span>
+                }
+            </div>
         </div>
     )
 }
