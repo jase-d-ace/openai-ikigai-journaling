@@ -98,8 +98,8 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
-    const loginWithToken = async () => {
-        const data = await fetch(`http://localhost:8000/users/token?token=${localStorage.getItem("user_token")}`);
+    const loginWithToken = async token => {
+        const data = await fetch(`http://localhost:8000/users/token?token=${token}`);
         const json = await data.json();
 
         if (json.status == 200) {

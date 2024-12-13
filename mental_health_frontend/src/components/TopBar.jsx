@@ -5,7 +5,7 @@ export default function TopBar() {
     const { currentUser, logout, loginWithToken } = useAuth();
 
     if (localStorage.getItem("user_token") && !currentUser.isLoggedIn) {
-        loginWithToken();
+        loginWithToken(localStorage.getItem("user_token"));
     }
 
     return (
