@@ -1,3 +1,95 @@
+.top-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.todays-entry {
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.journal-form {
+    border: 1px solid #CDCED7;
+    box-shadow: 3px 3px 3px #DdDdDd;
+    border-radius: 5px;
+    background: #F5F5F8;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0.25em;
+    
+    .form-part {
+        margin: 0.5em 3em;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .title-input {
+        height: 2.5em;
+    }
+
+    label {
+        font-weight: bold;
+        margin-bottom: 0.25em;
+    }
+
+    .text-input {
+        border: 1px solid #CDCED7;
+        box-shadow: 3px 3px 3px #DdDdDd;
+        border-radius: 5px;
+        width: 90em;
+    }
+
+    .feeling-gauge {
+        margin-top: 0.5em;
+        width: 24.7em;
+        justify-content: space-around;
+        box-shadow: 3px 3px 3px #DdDdDd;
+    }
+
+    .option {
+        height: 2.5em;
+        width: 10em;
+        padding-bottom: 0.8em;
+        padding-top: 0.25em;
+        cursor: pointer;
+        
+        .option-button {
+            padding-top: 0.7em;
+        }
+    }
+
+    .selected {
+        background: #B3F2FF;
+    }
+
+    .option:first-child {
+        border-radius: 5px 0 0 5px;
+    }
+
+    .option:last-child {
+        border-radius: 0 5px 5px 0;
+    }
+
+
+    .submit {
+        background: #B3F2FF;
+        border: 1px solid #CDCED7;
+        box-shadow: 3px 3px 3px #DdDdDd;
+        border-radius: 5px;
+        font-size:1em;
+        align-self: center;
+        height: 2em;
+        width: 25em;
+        margin-top: 0.5em;
+        margin-bottom: 1em;
+    }
+}
+
 .feeling-gauge {
     display: flex;
     flex-direction: row;
@@ -10,8 +102,11 @@
         border: 1px solid #CDCED7;
     }
 }
-
-
+.footer {
+    margin-top: 5em;
+    min-height: 50px;
+    text-align: center;
+}
 
 @media (max-width: 450px) {
     header {
@@ -258,16 +353,3 @@
     }
 }
 
-.top-bar {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding-left: 1em;
-    padding-right: 1em;
-}
-
-.footer {
-    min-height: 50px;
-    text-align: center;
-    position: absolute;
-}

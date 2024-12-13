@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { useState } from 'react';
 import { useAuth } from "./authContext.jsx";
-import './App.css'
+import './App.css';
 
 function App() {
     const [formData, setFormData] = useState({})
@@ -68,7 +68,7 @@ function App() {
                     <label>Write your thoughts</label>
                     <textarea placeholder="write your thoughts here" className="text-input" required onChange={e => debounce("content", e.target.value, 500)} rows="10" cols="100"></textarea>
                 </div>
-                <input className="submit" type="submit" value="gogogo" />
+                <input className="submit" type="submit" value="Submit" />
             </form>
 
             {
