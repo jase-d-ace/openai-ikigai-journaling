@@ -10,7 +10,7 @@ export default function JournalEntry({ published_at, title, feeling, content, an
 
     }
     return (
-        <div className="journal-entry">
+        <div className="entry-holder">
             <div className="journal-header">
                 <strong>{ new Date(published_at).toLocaleDateString() } - {title} </strong>
                 <p className="emotion"> You felt <strong>{feelingsMap[feeling]}</strong> </p>

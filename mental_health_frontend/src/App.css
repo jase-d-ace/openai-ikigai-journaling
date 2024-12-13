@@ -24,6 +24,14 @@
     }
     
     .journal-form {
+        border: 1px solid #CDCED7;
+        box-shadow: 3px 3px 3px #DdDdDd;
+        border-radius: 5px;
+        background: #F5F5F8;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 0.25em;
         
         .form-part {
             margin: 0.5em;
@@ -32,14 +40,6 @@
             align-items: flex-start;
         }
         
-        border-radius: 5px;
-        background: #F5F5F8;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        margin: 0.25em;
-        border: 1px solid #CDCED7;
-        box-shadow: 3px 3px 3px #DdDdDd;
 
         .title-input {
             height: 2.5em;
@@ -73,7 +73,7 @@
             cursor: pointer;
             
             .option-button {
-                padding-top: 0.5em;
+                padding-top: 0.7em;
             }
         }
 
@@ -135,7 +135,7 @@
         }
     }
 
-    .journal-entry {
+    .entry-holder {
         border: 1px solid #CDCED7;
         box-shadow: 3px 3px 3px #DdDdDd;
         border-radius: 5px;
@@ -150,6 +150,10 @@
 
     .user-info {
         padding-top: 1.3em;
+
+        .logout {
+            cursor: pointer;
+        }
     }
 
     .footer {

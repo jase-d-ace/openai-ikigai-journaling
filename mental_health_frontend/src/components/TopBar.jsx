@@ -15,7 +15,7 @@ export default function TopBar() {
             {currentUser.isLoggedIn || localStorage.getItem("user_token") ? 
             <div className="user-info"> 
                 <strong>Welcome, {currentUser.user.username} </strong> 
-                <span onClick={logout}>| Log Out</span>
+                <span className="logout" onClick={logout}>| Log Out</span>
             </div>
             : 
             <h4><Link to="/login">Login</Link></h4>}
