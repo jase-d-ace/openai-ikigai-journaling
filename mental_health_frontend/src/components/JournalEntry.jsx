@@ -1,23 +1,21 @@
 import "../App.css";
 
-export default function JournalEntry({ published_at, title, feeling, content, answer}) {
-    const feelingsMap = {
-        "-2": "Awful",
-        "-1": "Bad",
-        "0": "Neutral",
-        "1": "Good",
-        "2": "Amazing"
+export default function JournalEntry({ published_at, passion, profession, mission, vocation, answer}) {
 
-    }
     return (
         <div className="entry-holder">
             <div className="journal-header">
-                <strong>{ new Date(published_at).toLocaleDateString() } - {title} </strong>
-                <p className="emotion"> You felt <strong>{feelingsMap[feeling]}</strong> </p>
+                <strong>{ new Date(published_at).toLocaleDateString() } </strong>
             </div>
-            <div className="entry-text entry">
-                <strong>You wrote...</strong>
-                <p>{content}</p>                
+            <div className="entry-text your-answers">
+                <strong>Your Passion:</strong>
+                <p>{passion}</p>
+                <strong>Your Profession:</strong>
+                <p>{profession}</p>
+                <strong>Your Mission</strong>
+                <p>{mission}</p>
+                <strong>Your Vocation</strong>
+                <p>{vocation}</p>
             </div>
             <div className="entry-text answer">
                 <strong> GPT-4o-mini said... </strong>

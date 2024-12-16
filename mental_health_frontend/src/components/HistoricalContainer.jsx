@@ -5,10 +5,10 @@ import JournalEntry from "./JournalEntry";
 import "../App.css";
 
 export default function HistoricalContainer() {
-    const [pastEntries, setPastEntries] = useState([]);
+    const [pastEntries, setPastEntries] = useState({});
     const { currentUser } = useAuth();
 
-    if (currentUser.isLoggedIn && !pastEntries.length) {
+    if (currentUser.isLoggedIn && !pastEntries.journals?.length) {
         const dataFetch = async () => {
             const data = await fetch(`http://localhost:8000/journals?id=${currentUser.user.id}`);
             const json = await data.json();

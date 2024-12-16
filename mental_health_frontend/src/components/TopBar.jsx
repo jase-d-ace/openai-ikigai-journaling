@@ -11,7 +11,7 @@ export default function TopBar() {
 
     return (
         <div className="top-bar">
-            <h3>You Matter</h3>
+            <h3>Your Ikigai</h3>
             {currentUser.isLoggedIn || localStorage.getItem("user_token") ? 
             <div className="user-info"> 
                 <strong>Welcome, {currentUser.user.username} </strong> 
