@@ -64,34 +64,26 @@ def read_root():
 async def handle_entry(request: Request, db: Session = Depends(get_db)):
     req = await request.json()
 
-    emotions_map = {
-        -2: "I feel awful",
-        -1: "I don't feel great",
-        0: "I feel neutral or I'm having trouble feeling at all",
-        1: "I actually feel okay",
-        2: "I feel incredible"
-    }
-
     completion = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
             {"role": "system", 
              "content": """
-                You will receive three pieces of information: a Feeling, a Title, and an Entry. 
-                Please respond to the entry and feeling as someone who cares about the writer's mental wellbeing, 
-                and provide affirmations, advice, and any relevant mental health reminders. 
-                There's no need to lead with a greeting, please just get right into the advice. 
-                Also, please respond in the first person. Act as this individual's friend and personalize your advice.
+                Help me find my Ikigai based on the given answers. 
+                Please respond in the first person as someone who is giving me advice and/or projects that I can work on that align with my skillset and the world around me. And also please take into account everything else i say and give other advice as needed.
              """},
-            {"role": "user", "content": f"Today: {emotions_map[req['feeling']]}\nTitle: {req['title']}\nEntry: {req['content']}"}
+            {"role": "user", "content": f"""
+                What I love to do: {req["passion"]}, What I'm good at: {req["profession"]}, What I think the world needs: {req["mission"]}, What I can be paid for: {req["vocation"]}
+            """}
         ],
         temperature=0.7
     )
 
     new_entry = Journal(
-        title=req["title"],
-        feeling=req["feeling"],
-        content=req["content"],
+        passion=req["passion"],
+        profession=req["profession"],
+        mission=req["mission"],
+        vocation=req["vocation"],
         answer=completion.choices[0].message.content,
         user_id=req["user_id"]
     )
@@ -103,10 +95,11 @@ async def handle_entry(request: Request, db: Session = Depends(get_db)):
     return {
         "id": new_entry.id,
         "published_at": new_entry.published_at,
-        "title": new_entry.title,
-        "feeling": new_entry.feeling,
-        "content": new_entry.content,
-        "answer": new_entry.answer,
+        "passion": new_entry.passion,
+        "profession": new_entry.profession,
+        "mission": new_entry.mission,
+        "vocation": new_entry.vocation,
+        "answer": new_entry.answer
     }
 
 @app.get("/journals")

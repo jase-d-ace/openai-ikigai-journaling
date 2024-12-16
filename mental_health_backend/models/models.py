@@ -13,9 +13,11 @@ class Journal(Base):
 
     id = Column(UUID(as_uuid=True), primary_key=True, nullable=False, default=uuid.uuid4)
     published_at = Column(TIMESTAMP(timezone=True), server_default=text('now()'))
-    title = Column(String, nullable=False)
-    feeling = Column(Integer, index=True, nullable=False)
-    content = Column(String, nullable=False)
+    passion = Column(String, nullable=False)
+    profession = Column(String, index=True, nullable=False)
+    mission = Column(String, index=True, nullable=False)
+    vocation = Column(String, index=True, nullable=False)
+    other = Column(String, default="")
     answer = Column(String, nullable=False)
     user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"))
 
