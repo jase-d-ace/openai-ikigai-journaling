@@ -5,6 +5,7 @@ import './App.css';
 
 function App() {
     const [formData, setFormData] = useState({})
+    const [loading, setLoading] = useState(false)
     const [results, setResults] = useState(null)
     const { currentUser } = useAuth();
 
@@ -16,6 +17,7 @@ function App() {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
+        setLoading(true);
 
         const data = await fetch("http://localhost:8000/journal", {
             method: "POST",
@@ -26,6 +28,7 @@ function App() {
         })
         const json = await data.json()
         setResults(json)
+        setLoading(false);
 
     }
 
@@ -70,6 +73,9 @@ function App() {
                 </div>
                 <input className="submit" type="submit" value="Submit" />
             </form>
+            {
+                loading && <p>loading...</p>
+            }
 
             {
                 results &&
