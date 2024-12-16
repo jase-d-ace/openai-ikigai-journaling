@@ -75,7 +75,14 @@ async def handle_entry(request: Request, db: Session = Depends(get_db)):
     completion = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
-            {"role": "system", "content": "You will receive three pieces of information: a Feeling, a Title, and an Entry. Please respond to the entry and feeling as someone who cares about the writer's mental wellbeing, and provide affirmations, advice, and any relevant mental health reminders. There's no need to lead with a greeting, please just get right into the advice."},
+            {"role": "system", 
+             "content": """
+                You will receive three pieces of information: a Feeling, a Title, and an Entry. 
+                Please respond to the entry and feeling as someone who cares about the writer's mental wellbeing, 
+                and provide affirmations, advice, and any relevant mental health reminders. 
+                There's no need to lead with a greeting, please just get right into the advice. 
+                Also, please respond in a way that doesn't just summarize the entry. Act as this individual's friend and personalize your advice.
+             """},
             {"role": "user", "content": f"Today: {emotions_map[req['feeling']]}\nTitle: {req['title']}\nEntry: {req['content']}"}
         ],
         temperature=0.7
@@ -104,7 +111,7 @@ async def handle_entry(request: Request, db: Session = Depends(get_db)):
 
 @app.get("/journals")
 def get_journals(id: str, db: Session = Depends(get_db)):
-    journals = db.query(Journal).filter(Journal.user_id == id)
+    journals = db.query(Journal).filter(Journal.user_id == id).order_by(Journal.published_at.desc())
 
     return {
         "journals": journals.all()
