@@ -229,6 +229,52 @@ header {
     }
 }
 
+.results-container {
+    background: #F5F5F8;
+    border: 1px solid #CDCED7;
+    box-shadow: 3px 3px 3px #DdDdDd;
+    border-radius: 5px;
+    margin-left: 0.25em;
+    height: 15.5em;
+    width: 68.7em;
+    overflow-y: scroll;
+    padding: 1em 1em 0 1em;
+}
+
+.loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
+}
+
+.loading {
+  width: 5em;
+  height: 5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: linear-gradient(0deg, #F5F5F8 50%, #B3F2FF 100%);
+  animation: spin 1s linear infinite;
+}
+
+.inner-circle {
+  width: 90%;
+  height: 90%;
+  background-color: #F5F5F8;
+  border-radius: 50%;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0);
+  }
+  to{
+    transform: rotate(360deg);
+  }
+}
+
 .past-entries {
     background: #F5F5F8;
     border: 1px solid #CDCED7;
