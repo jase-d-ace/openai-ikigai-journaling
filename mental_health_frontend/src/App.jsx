@@ -1,6 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { useState } from 'react';
 import { useAuth } from "./authContext.jsx";
+import Loading from "./components/Loading.jsx";
 import './App.css';
 
 function App() {
@@ -74,9 +75,8 @@ function App() {
                 <input className="submit" type="submit" value="Submit" />
             </form>
             {
-                loading && <p>loading...</p>
+                loading && <Loading />
             }
-
             {
                 results &&
                 <div className="results-container">
