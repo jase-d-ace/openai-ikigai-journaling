@@ -1,3 +1,4 @@
+import Markdown from "react-markdown";
 import "../App.css";
 
 export default function JournalEntry({ published_at, passion, profession, mission, vocation, answer}) {
@@ -19,7 +20,9 @@ export default function JournalEntry({ published_at, passion, profession, missio
             </div>
             <div className="entry-text answer">
                 <strong> GPT-4o-mini said... </strong>
-                <p>{answer}</p>
+                <Markdown>
+                    {answer}
+                </Markdown>
             </div>
         </div>
     )
