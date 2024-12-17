@@ -75,7 +75,7 @@ async def handle_entry(request: Request, db: Session = Depends(get_db)):
                 and how I can make changes in my life to get closer to my Ikigai.
              """},
             {"role": "user", "content": f"""
-                What I love to do: {req["passion"]}, What I'm good at: {req["profession"]}, What I think the world needs: {req["mission"]}, What I can be paid for: {req["vocation"]}
+                What I love to do: {req["passion"]}, What I'm good at: {req["profession"]}, What I think the world needs: {req["mission"]}, What I can be paid for: {req["vocation"]}, Other thoughts: {req["content"]}
             """}
         ],
         temperature=0.7
@@ -86,6 +86,7 @@ async def handle_entry(request: Request, db: Session = Depends(get_db)):
         profession=req["profession"],
         mission=req["mission"],
         vocation=req["vocation"],
+        other=req["content"],
         answer=completion.choices[0].message.content,
         user_id=req["user_id"]
     )
