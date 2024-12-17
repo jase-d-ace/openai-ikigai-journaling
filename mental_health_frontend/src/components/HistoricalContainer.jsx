@@ -33,7 +33,6 @@ export default function HistoricalContainer() {
                     <span> No entries yet! Go make some. </span>
                 }                
             </div>
-            <p>Just remember. No matter what anyone tells you, and this includes yourself, you are a positive addition to this world. No one should hold power over you to make you feel any way you don't want to feel.</p>
         </div> :
         <Navigate replace to="/login" />
     )
