@@ -14,7 +14,7 @@ export default function Nav() {
                 </nav>
             </div> : 
             <header className="hero-image">
-                <h1>Welcome to your Mental Health Tracker</h1>
+                <h1>Find Your Ikigai</h1>
             </header>
     )
 }
