@@ -461,51 +461,25 @@ header {
             width: 26em;
         }
 
-        .feeling-gauge {
-            margin-top: 0.5em;
-            width: 23em;
-            justify-content: space-around;
-            box-shadow: 3px 3px 3px #DdDdDd;
-        }
-
-        .option {
-            height: 2.5em;
-            width: 10em;
-            padding-bottom: 0.8em;
-            padding-top: 0.25em;
-            cursor: pointer;
-            
-            .option-button {
-                padding-top: 0.7em;
-            }
-        }
-
-        .selected {
-            background: #B3F2FF;
-        }
-
-        .option:first-child {
-            border-radius: 5px 0 0 5px;
-        }
-
-        .option:last-child {
-            border-radius: 0 5px 5px 0;
-        }
-
         textarea {
             width: 30em;
         }
 
+        .buttons {
+            display: flex;
+            flex-direction: row;
+        }
+
         .submit {
-            background: #F5F5F8;
+            background: #B3F2FF;
             border: 1px solid #CDCED7;
             box-shadow: 3px 3px 3px #DdDdDd;
             border-radius: 5px;
             font-size:1em;
             align-self: center;
             height: 2em;
-            width: 22em;
-            margin-top: 0.5em;
+            width: 5em;
+            margin-top: 1em;
             margin-bottom: 1em;
         }
     }
