@@ -173,50 +173,27 @@ header {
         width: 70em;
     }
 
-    .feeling-gauge {
-        margin-top: 0.5em;
-        width: 24.7em;
-        justify-content: space-around;
+    .buttons {
+        align-self: center;
+
+        .next {
+            background: #B3F2FF;
+        }
+
+    }
+
+    .button {
+        background: #F5F5F8;
+        border: 1px solid #CDCED7;
         box-shadow: 3px 3px 3px #DdDdDd;
+        border-radius: 5px;
+        font-size:1em;
+        align-self: center;
+        height: 2em;
+        width: 5em;
+        margin: 0 0.5em 0 0.5em;
     }
 
-    .option {
-        height: 2.5em;
-        width: 10em;
-        padding-bottom: 0.8em;
-        padding-top: 0.25em;
-        cursor: pointer;
-        
-        .option-button {
-            padding-top: 0.7em;
-        }
-    }
-
-    .selected {
-        background: #B3F2FF;
-    }
-
-    .option:first-child {
-        border-radius: 5px 0 0 5px;
-    }
-
-    .option:last-child {
-        border-radius: 0 5px 5px 0;
-    }
-
-
-    .feeling-gauge {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-    
-        .option {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            border: 1px solid #CDCED7;
-        }
-    }
     .submit {
         background: #B3F2FF;
         border: 1px solid #CDCED7;
@@ -228,6 +205,11 @@ header {
         width: 25em;
         margin-top: 0.5em;
         margin-bottom: 1em;
+    }
+
+    .submit:disabled {
+        background: #E2E3E7;
+        color: #6B6E85;
     }
 }
 
