@@ -32,7 +32,7 @@ const questions = [
     },
     {
         label: "content",
-        human_label: "Other Thoughts",
+        human_label: "Other Thoughts (Optional)",
         placeholder: "What else is on your mind that's relevant to what you love and what you believe your calling is?",
         response: ""
     }
@@ -49,7 +49,7 @@ function App() {
     const questionHasAnswer = (question) => !!question.response;
 
     const formisValid = () => {
-        for (let i = 0 ; i < questions.length ; i++) {
+        for (let i = 0 ; i < questions.length - 1 ; i++) { // last box is optional, so can submit without it
             if (!questionHasAnswer(questions[i])) {
                 return false
             }
@@ -57,8 +57,6 @@ function App() {
         return true;
     }
 
-
-    
     const debounce = (name, query) => {
 
         setFormData({...formData, [name]: query});
@@ -105,8 +103,8 @@ function App() {
                     </textarea>
                     <div className="buttons">
                         {currentQuestion > 0 ? <button className="button back" type="button" onClick={() => setCurrentQuestion(currentQuestion - 1)}>Back</button> : ""} 
-                        <input className="submit" disabled={!formisValid()} type="submit" value="Submit" />
-                        {currentQuestion < 4 ? <button className="button next" type="button" disabled={!questionHasAnswer(questions[currentQuestion])} onClick={() => setCurrentQuestion(currentQuestion + 1)}>Next</button>: ""}
+                        {currentQuestion == 4 && formisValid() && <input className="button submit"  type="submit" value="Submit" />}
+                        {currentQuestion < 4 ? <button className="button next" type="button" onClick={() => setCurrentQuestion(currentQuestion + 1)}>Next</button>: ""}
                     </div>
                 </div>
             </form>
