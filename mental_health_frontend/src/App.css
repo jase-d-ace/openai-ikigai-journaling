@@ -384,6 +384,8 @@ header {
         background: #F5F5F8;
         display: flex;
         flex-direction: column;
+        margin-left: 0.5em;
+        width: 25em;
 
         .register-link {
             text-align: center;
@@ -392,7 +394,6 @@ header {
     }
 
     .login-form {
-        
         .field {
             display: flex;
             flex-direction: column;
