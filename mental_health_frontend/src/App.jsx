@@ -57,7 +57,7 @@ function App() {
         return true;
     }
 
-    const debounce = (name, query) => {
+    const handleInputChange = (name, query) => {
 
         setFormData({...formData, [name]: query});
         questions[currentQuestion].response = query;
@@ -94,9 +94,8 @@ function App() {
                     <label>{questions[currentQuestion].human_label}</label>
                     <textarea 
                         className={`text-input ${questions[currentQuestion].label}-input`}
-                        required
                         placeholder={questions[currentQuestion].placeholder}
-                        onChange={e => debounce(questions[currentQuestion].label, e.target.value)}
+                        onChange={e => handleInputChange(questions[currentQuestion].label, e.target.value)}
                         value={questions[currentQuestion].response}
                         rows="5" cols="100"
                     >
