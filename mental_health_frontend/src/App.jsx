@@ -2,6 +2,7 @@ import { Navigate } from "react-router-dom";
 import { useState } from 'react';
 import { useAuth } from "./authContext.jsx";
 import Loading from "./components/Loading.jsx";
+import Markdown from "react-markdown";
 import './App.css';
 
 function App() {
@@ -91,7 +92,9 @@ function App() {
             {
                 results &&
                 <div className="results-container">
-                    {results.answer}
+                    <Markdown>
+                        {results.answer}
+                    </Markdown>
                 </div>
             }
         </div> :
