@@ -270,7 +270,7 @@ header {
     }
     
     .entries {
-        height: 45em;
+        height: 60em;
         overflow-y: scroll;
     }
 }

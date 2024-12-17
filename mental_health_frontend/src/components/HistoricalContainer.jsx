@@ -33,6 +33,7 @@ export default function HistoricalContainer() {
                     <span> No entries yet! Go make some. </span>
                 }                
             </div>
+            <p>Your Ikigai is closer than you think. Keep moving towards it.</p>
         </div> :
         <Navigate replace to="/login" />
     )
