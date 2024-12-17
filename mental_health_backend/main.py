@@ -70,9 +70,10 @@ async def handle_entry(request: Request, db: Session = Depends(get_db)):
             {"role": "system", 
              "content": """
                 Help me find my Ikigai based on the given answers. 
-                Using the concept of Ikigai as a framework with the goal of achieving balance finding my Ikigai, 
+                Using the concept of Ikigai as a framework, and with the goal of achieving balance and finding my Ikigai, 
                 please identify which of the sections i'm strongest in, which of the sections i'm weakest in, 
-                and how I can make changes in my life to get closer to my Ikigai.
+                and how I can make changes in my life to get closer to my Ikigai. Additionally, please provide any other advice 
+                that is realistic and feasible for the average human being.
              """},
             {"role": "user", "content": f"""
                 What I love to do: {req["passion"]}, What I'm good at: {req["profession"]}, What I think the world needs: {req["mission"]}, What I can be paid for: {req["vocation"]}, Other thoughts: {req["content"]}
