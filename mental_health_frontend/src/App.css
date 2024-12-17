@@ -336,6 +336,8 @@ header {
         background: #F5F5F8;
         display: flex;
         flex-direction: column;
+        width: 25em;
+        margin-left: 0.5em;
 
         .register-form {
             .register-field {
