@@ -70,8 +70,10 @@ async def handle_entry(request: Request, db: Session = Depends(get_db)):
                 Help me find my Ikigai based on the given answers. 
                 Using the concept of Ikigai as a framework, and with the goal of achieving balance and finding my Ikigai, 
                 please identify which of the sections i'm strongest in, which of the sections i'm weakest in, 
-                and how I can make changes in my life to get closer to my Ikigai. Additionally, please provide any other advice 
+                and the specific steps I can take to improve the sections that i'm weakest in. Additionally, please provide any other advice 
                 that is realistic and feasible for the average human being. What steps can I take towards living a more fulfilling life in the framework of Ikigai?
+                Please refer me to any books, YouTube channels, podcasts, or other forms of media that I can consume to help me more understand my specific Ikigai.
+                When you respond, please keep it inspiring and conversational. When giving suggestions, please break them down into small, actionable next steps that I can take over time.
              """},
              {"role": "user", "content": f"""
                 What I love to do: {req["passion"]}, What I'm good at: {req["profession"]}, What I think the world needs: {req["mission"]}, What I can be paid for: {req["vocation"]}, Other thoughts: {req["content"]}
@@ -81,14 +83,12 @@ async def handle_entry(request: Request, db: Session = Depends(get_db)):
     prev_entry = db.query(Journal).filter(Journal.user_id == req["user_id"]).order_by(Journal.published_at.desc()).first()
     
     if prev_entry:
-        messages.append({
-            "role": "user",
-            "content": f"""
-                please also take into account the following, which is my previous journal entry and let me know about where i can still make progress:
-                What I love: {prev_entry.passion}, What I'm good at: {prev_entry.profession}, What I think the world needs: {prev_entry.mission}, What I can be paid for: {prev_entry.vocation}, other thoughts: {prev_entry.other}
+        messages[1]["content"] += f"""
+                please also compare my answers above to my previous journal entry, and identify any places i've grown, any places i've regressed, and any other pieces of advice that come up from comparing the two:
+                What I love: {prev_entry.passion}, What I'm good at: {prev_entry.profession}, What I think the world needs: {prev_entry.mission}, What I can be paid for: {prev_entry.vocation}, other thoughts: {prev_entry.other}.
+                Your previous thoughts are {prev_entry.answer}. If you've changed your mind since this answer, let me know, and also let me knkow why.
             """
-        })
-
+        
     completion = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=messages,
