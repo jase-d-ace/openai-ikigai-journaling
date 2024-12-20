@@ -22,7 +22,8 @@ The user's entries are saved in the database and can be retrieved and reviewed. 
 * The `alembic.ini` file is also looking for a database string, so create a database and then replace the `sqlalchemy.url` string that's in the file with yours.
 
 1. `pip install -r requirements.txt`
-2. `fastapi dev main.py`
+2. `alembic upgrade head` (I'm not actually sure if this is necessary to set up your database, but i'm assuming so? I have no idea if alembic runs the migrations in order to set up your databse.)
+3. `fastapi dev main.py`
 
 ### For the frontend
 1. `npm install`
