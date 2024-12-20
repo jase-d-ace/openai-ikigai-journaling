@@ -57,7 +57,6 @@ function App() {
                 <h2>
                     What is Your Ikigai?
                 </h2>
-                <p>Let GPT help you find your Ikigai. This is the intersection of what you love to do, what you're good at, what the world needs, and what you can be paid for.</p>
             </header>
             <div className="today-content">
                 <div className="ikigai-info">
