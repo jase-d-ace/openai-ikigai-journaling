@@ -8,10 +8,12 @@ import './App.css';
 
 function App() {
 
-    const [currentQuestion, setCurrentQuestion] = useState(0)
-    const [formData, setFormData] = useState({})
-    const [loading, setLoading] = useState(false)
-    const [results, setResults] = useState(null)
+    const [currentQuestion, setCurrentQuestion] = useState(0);
+    const [formData, setFormData] = useState({
+        content: "No other thoughts"
+    });
+    const [loading, setLoading] = useState(false);
+    const [results, setResults] = useState(null);
     const [showMore, setShowMore] = useState(false);
     const { currentUser } = useAuth();
 
@@ -33,6 +35,7 @@ function App() {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         setLoading(true);
+        setShowMore(false);
 
         const data = await fetch("http://localhost:8000/journal", {
             method: "POST",
@@ -44,7 +47,6 @@ function App() {
         const json = await data.json()
         setResults(json);
         setLoading(false);
-        setShowMore(false);
 
     }
 

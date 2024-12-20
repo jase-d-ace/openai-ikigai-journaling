@@ -462,7 +462,7 @@ header {
     }
 
     .todays-entry {
-        height: 10em;
+        height: 50em;
         width: 20em;
         padding: 0 1em 0 1em;
         display: flex;
@@ -478,6 +478,7 @@ header {
             display: flex;
             flex-direction: column;
             align-items: flex-start;
+            height: 24em;
 
 
             .mobile-ikigai-info {
@@ -574,10 +575,11 @@ header {
         border: 1px solid #CDCED7;
         box-shadow: 3px 3px 3px #DdDdDd;
         border-radius: 5px;
-        margin-left: 0.25em;
-        height: 15.5em;
-        width: 26em;
+        margin-left: 0;
+        height: 30em;
+        width: 23em;
         overflow-y: scroll;
+        padding: 0.25em;
     }
 
     .past-entries {

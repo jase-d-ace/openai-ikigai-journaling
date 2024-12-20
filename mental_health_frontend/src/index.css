@@ -42,7 +42,7 @@ body {
 .current {
     font-weight: bold;
     padding-bottom: 0.25em;
-    border-bottom: 3px solid #AC008A;
+    border-bottom: 3px solid #EF00BF;
 }
 
 a {
@@ -50,7 +50,7 @@ a {
   text-decoration: inherit;
 }
 a:hover {
-  color: #AC008A;
+  color: #EF00BF;
 }
 
 a:visited {
