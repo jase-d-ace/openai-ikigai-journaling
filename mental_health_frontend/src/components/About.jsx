@@ -1,8 +1,12 @@
+import { useAuth } from "../authContext";
+import { Navigate } from "react-router-dom";
 import ikigai from "../assets/ikigai.png";
 import "../App.css";
 
 export default function About() {
+    const { currentUser } = useAuth();
     return (
+        currentUser.isLoggedIn ? 
         <div className="about-ikigai">
             <header>
                 <h2>A Reason to Live</h2>
@@ -108,6 +112,6 @@ export default function About() {
                     </div>
                 </div>
             </main>
-        </div>
+        </div> : <Navigate to="/login" />
     )
 }
