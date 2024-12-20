@@ -65,6 +65,7 @@ export const AuthProvider = ({ children }) => {
                 token: "",
                 error: "Passwords must match"
             })
+            return false;
         }
 
         const res = await fetch("http://localhost:8000/users/register", {
@@ -87,7 +88,7 @@ export const AuthProvider = ({ children }) => {
                 isLoggedIn: true
             })
 
-            localStorage.setItem("user_token", json.access_token)
+            localStorage.setItem("user_token", json.access_token);
         } else {
             setCurrentUser({
                 user: {},
@@ -95,6 +96,7 @@ export const AuthProvider = ({ children }) => {
                 token: "",
                 error: json.message
             })
+            return false;
         }
     }
 

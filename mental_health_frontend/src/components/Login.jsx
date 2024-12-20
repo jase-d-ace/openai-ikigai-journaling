@@ -4,6 +4,7 @@ import { useAuth } from "../authContext";
 import "../App.css";
 
 export default function Login() {
+    const [submitted, setSubmitted] = useState(false)
     const [loginFormData, setLoginFormData] = useState({
         username: "",
         password: "",
@@ -17,6 +18,7 @@ export default function Login() {
     const handleFormSubmit = async e => {
         e.preventDefault();
         await login(loginFormData.username, loginFormData.password);
+        setSubmitted(true);
     }
 
     return (
@@ -27,7 +29,7 @@ export default function Login() {
                 <h2>Log in to start journaling</h2>
             </header>
             
-            <span className="error">{currentUser.error}</span>
+            {submitted && <span className="error">{currentUser.error}</span>}
 
             <form className="login-form" onSubmit={handleFormSubmit}>
                 <div className="field username-field">

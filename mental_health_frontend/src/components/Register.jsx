@@ -5,6 +5,7 @@ import "../App.css";
 
 export default function Register() {
     const { currentUser, register } = useAuth();
+    const [submitted, setSubmitted] = useState(false);
     const [registerFormData, setRegisterFormData] = useState({
         username: "",
         password: "",
@@ -18,17 +19,18 @@ export default function Register() {
     const handleFormSubmit = async e => {
         e.preventDefault();
         await register(registerFormData.username, registerFormData.password, registerFormData.confirm)
+        setSubmitted(true);
 
     }
 
     return (
-        localStorage.getItem("user_token") ?
+        currentUser.isLoggedIn ?
         <Navigate replace to="/" /> :
         <div className="register">
             <header>
                 <h2>Create an Account</h2>
             </header>
-            <span className="error">{currentUser.error}</span>
+            {submitted && <span className="error">{currentUser.error}</span>}
             <form className="register-form" onSubmit={handleFormSubmit}>
                 <div className="field register-field username-field">
                     <label>Username</label>
