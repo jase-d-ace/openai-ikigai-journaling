@@ -166,7 +166,13 @@ header {
     align-self: center;
     margin: 0.5em;
     width: 45em;
+    height: 31em;
     padding-top: 1em;
+
+    .desktop-more-info {
+        margin-left: 1em;
+        padding-right: 2em;
+    }
     
     .form-part {
         margin: 0.5em 3em;
@@ -290,6 +296,7 @@ header {
     box-shadow: 3px 3px 3px #DdDdDd;
     border-radius: 5px;
     padding: 0.5em;
+    margin-top: 1em;
     
     h2 {
         margin: 0;
@@ -298,6 +305,7 @@ header {
     .entries {
         height: 60em;
         overflow-y: scroll;
+        width: 70em;
     }
 }
 
@@ -529,6 +537,10 @@ header {
         align-items: center;
         margin: 1em 1.8em 1em 1.2em;
         width: 23em;
+
+        .desktop-more-info {
+            display:none;
+        }
         
         .form-part {
             margin: 0.5em;

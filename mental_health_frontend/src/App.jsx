@@ -95,6 +95,11 @@ function App() {
                             {currentQuestion < 4 ? <button className="button next" type="button" onClick={() => setCurrentQuestion(currentQuestion + 1)}>Next</button>: ""}
                         </div>
                     </div>
+                    <div className="desktop-more-info">
+                        <p>Take your time with these questions. They aren't easy to answer, and if you find yourself answering them quickly, take a breath and see if you can go even deeper into your thoughts. Are you only scratching the surface of your passions/skills/dreams? What more can you say about them? The more info you give, the more guidance we can give in return.</p>
+                        <p>It's also okay to not know the answer to these questions. This is <i>your</i> journey, and your life, and your calling. No one can tell you how fast or slow you have to find it.</p>
+                        
+                    </div>
                 </form>
             </div>
             { showMore &&
