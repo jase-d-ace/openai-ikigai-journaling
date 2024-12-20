@@ -1,7 +1,5 @@
 # Finding Your Ikigai
 
-![ikigai diagram](./mental_health_frontend/src/assets/ikigai.png)
-
 ## What is your Ikigai? 
 Ikigai (pronounced "ee-kee-guy") is a Japanese concept that translates to "reason for being." It represents the intersection of the things that make life fulfilling and meaningful: a unique blend of purpose, passion, and practicality.
 
