@@ -244,11 +244,11 @@ header {
     border: 1px solid #CDCED7;
     box-shadow: 3px 3px 3px #DdDdDd;
     border-radius: 5px;
-    margin-left: 0.25em;
-    height: 40em;
-    width: 66em;
+    margin: 1em 0 2em 1em;
+    height: 24em;
+    width: 64em;
     overflow-y: scroll;
-    padding: 1em 1em 0 1em;
+    padding: 1em 0 0 1em;
 }
 
 .loader-container {
@@ -575,11 +575,11 @@ header {
         border: 1px solid #CDCED7;
         box-shadow: 3px 3px 3px #DdDdDd;
         border-radius: 5px;
-        margin-left: 0;
+        margin-left: 0.4em;
         height: 30em;
-        width: 23em;
+        width: 22em;
         overflow-y: scroll;
-        padding: 0.25em;
+        padding: 0 0.5em 0 0.5em;
     }
 
     .past-entries {
