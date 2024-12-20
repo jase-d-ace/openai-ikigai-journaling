@@ -96,26 +96,26 @@ function App() {
                         </div>
                     </div>
                 </form>
-                { showMore &&
-                    <div className="mobile-ikigai-info">
-                        <div className="ikigai title">
-                            <h3>{questions[currentQuestion].title}</h3>
-                        </div>
-                        <div className="ikigai explanation">
-                            <p>{questions[currentQuestion].description}</p>
-                        </div>
-                        <div className="ikigai questions">
-                            <ul className="question-list">
-                                {
-                                    questions[currentQuestion].questions.map(question => (
-                                        <li className="question"><span>{question}</span></li>
-                                    ))
-                                }
-                            </ul>
-                        </div>
-                    </div>
-                }
             </div>
+            { showMore &&
+                <div className="mobile-ikigai-info">
+                    <div className="ikigai title">
+                        <h3>{questions[currentQuestion].title}</h3>
+                    </div>
+                    <div className="ikigai explanation">
+                        <p>{questions[currentQuestion].description}</p>
+                    </div>
+                    <div className="ikigai questions">
+                        <ul className="question-list">
+                            {
+                                questions[currentQuestion].questions.map(question => (
+                                    <li className="question"><span>{question}</span></li>
+                                ))
+                            }
+                        </ul>
+                    </div>
+                </div>
+            }
             {
                 loading && <Loading />
             }
