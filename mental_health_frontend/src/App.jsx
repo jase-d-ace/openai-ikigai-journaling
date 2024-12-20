@@ -86,7 +86,7 @@ function App() {
                             placeholder={questions[currentQuestion].placeholder}
                             onChange={e => handleInputChange(questions[currentQuestion].label, e.target.value)}
                             value={questions[currentQuestion].response}
-                            rows="5" cols="100"
+                            rows="10" cols="100"
                         >
                         </textarea>
                         <div className="buttons">
