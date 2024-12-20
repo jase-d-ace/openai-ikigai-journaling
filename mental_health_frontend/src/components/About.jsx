@@ -10,11 +10,11 @@ export default function About() {
         <div className="about-ikigai">
             <header>
                 <h2>A Reason to Live</h2>
-            </header>
-            <main>
                 <div className="image">
                     <img src={ikigai} alt="ikigai-diagram" />
                 </div>
+            </header>
+            <main>
                 <div className="section">
                     <h3 className="section-header">What is it?</h3>
                     <div className="section-body">

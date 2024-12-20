@@ -349,6 +349,25 @@ header {
     }
 }
 
+.about-ikigai {
+    header {
+        text-align: center;
+    }
+    
+    main {
+        border: 1px solid #CDCED7;
+        box-shadow: 3px 3px 3px #DdDdDd;
+        border-radius: 5px;
+        background: #F5F5F8;
+        padding: 0 1em 1em 1em;
+        margin-top: 1em;
+
+        .section {
+            border-bottom: 1px solid #323441;
+        }
+    }
+}
+
 .footer {
     text-align: center;
     align-self: center;
@@ -495,7 +514,8 @@ header {
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            height: 15em;
+            height: 20em;
+            max-width: 10em;
         }
 
         .ikigai-info {
@@ -515,7 +535,7 @@ header {
         flex-direction: column;
         align-items: flex-start;
         padding: 0 1em 0 1em;
-        margin: 2em 0 0 0.5em;
+        margin: 1em 0 0 0.5em;
         
 
         p {
@@ -607,13 +627,17 @@ header {
         box-shadow: 3px 3px 3px #DdDdDd;
         border-radius: 5px;
         padding: 0.5em;
+        width: 23em;
         
         h2 {
             margin: 0;
+            text-align: center;
         }
         
         .entries {
             height: 45em;
+            margin-left: 0.2em;
+            width: 23em;
             overflow-y: scroll;
         }
     }
@@ -636,6 +660,20 @@ header {
 
         .logout {
             cursor: pointer;
+        }
+    }
+
+    .about-ikigai {
+        max-width: 25em;
+        header {
+            text-align: center;
+        }
+
+    }
+
+    .image {
+        img {
+            display:none;
         }
     }
 
