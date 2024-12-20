@@ -4,7 +4,7 @@ import { Link, Navigate } from "react-router-dom";
 import "../App.css";
 
 export default function Register() {
-    const { register } = useAuth();
+    const { currentUser, register } = useAuth();
     const [registerFormData, setRegisterFormData] = useState({
         username: "",
         password: "",
@@ -28,6 +28,7 @@ export default function Register() {
             <header>
                 <h2>Create an Account</h2>
             </header>
+            <span className="error">{currentUser.error}</span>
             <form className="register-form" onSubmit={handleFormSubmit}>
                 <div className="field register-field username-field">
                     <label>Username</label>

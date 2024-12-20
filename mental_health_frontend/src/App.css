@@ -73,6 +73,10 @@ header {
     }
 }
 
+.error {
+    color: #CA0003;
+}
+
 .login {
     border: 1px solid #CDCED7;
     box-shadow: 3px 3px 3px #DdDdDd;

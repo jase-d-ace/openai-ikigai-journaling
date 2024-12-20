@@ -26,6 +26,8 @@ export default function Login() {
             <header>
                 <h2>Log in to start journaling</h2>
             </header>
+            
+            <span className="error">{currentUser.error}</span>
 
             <form className="login-form" onSubmit={handleFormSubmit}>
                 <div className="field username-field">
