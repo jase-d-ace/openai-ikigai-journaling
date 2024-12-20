@@ -42,8 +42,9 @@ function App() {
             body: JSON.stringify({...formData, user_id: currentUser.user.id})
         })
         const json = await data.json()
-        setResults(json)
+        setResults(json);
         setLoading(false);
+        setShowMore(false);
 
     }
 
@@ -95,23 +96,21 @@ function App() {
                     </div>
                 </form>
                 { showMore &&
-                    <div className="ikigai-descriptions">
-                        <div className="mobile-ikigai-info">
-                            <div className="ikigai title">
-                                <h3>{questions[currentQuestion].title}</h3>
-                            </div>
-                            <div className="ikigai explanation">
-                                <p>{questions[currentQuestion].description}</p>
-                            </div>
-                            <div className="ikigai questions">
-                                <ul className="question-list">
-                                    {
-                                        questions[currentQuestion].questions.map(question => (
-                                            <li className="question"><span>{question}</span></li>
-                                        ))
-                                    }
-                                </ul>
-                            </div>
+                    <div className="mobile-ikigai-info">
+                        <div className="ikigai title">
+                            <h3>{questions[currentQuestion].title}</h3>
+                        </div>
+                        <div className="ikigai explanation">
+                            <p>{questions[currentQuestion].description}</p>
+                        </div>
+                        <div className="ikigai questions">
+                            <ul className="question-list">
+                                {
+                                    questions[currentQuestion].questions.map(question => (
+                                        <li className="question"><span>{question}</span></li>
+                                    ))
+                                }
+                            </ul>
                         </div>
                     </div>
                 }
