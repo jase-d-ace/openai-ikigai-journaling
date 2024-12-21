@@ -7,8 +7,8 @@ Rooted in Japanese culture, ikigai is about discovering the balance between what
 
 The word itself comes from "iki" (life) and "gai" (value or worth), making it a way to explore the things that bring value to your life and give you a reason to live. While the idea of ikigai is deeply ingrained in Japanese culture, its principles resonate universally and can serve as a powerful framework for anyone seeking clarity in their life or career.
 
-## What is this app?
-The name of this repo is no longer relevant because it has changed away from being a mental health journaling app to a place where a user can provide ChatGPT with their 4 pillars of Ikigai and receive some more questions and guidance on finding it for themselves.
+## What is this app?A
+user can provide ChatGPT with their 4 pillars of Ikigai and receive some more questions and guidance on finding it for themselves.
 
 ## How it works
 This app is built on a React/FastAPI/Postgres stack that leverages the OpenAI API to ask ChatGPT for guiding questions in response to a user's 4 pillars. The user will create an account, and then upon creating an account, fill out a form by reflecting on what each pillar of Ikigai means to them and how it applies to their own lives, and then will receive an answer from ChatGPT on how to get closer to their Ikigai.
