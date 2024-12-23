@@ -148,7 +148,7 @@ header {
             border: 1px solid #CDCED7;
             box-shadow: 3px 3px 3px #DdDdDd;
             border-radius: 5px;
-            background: #F5F5F8;
+            background:#B3F2FF;
             padding: 0 1em 0 1em;
             overflow-y: scroll;
         }
@@ -157,6 +157,10 @@ header {
             display: none;
         }
     }
+}
+
+small {
+    color: #B4B5C2
 }
 
 .journal-form {
@@ -179,7 +183,7 @@ header {
     }
     
     .form-part {
-        margin: 0.5em 3em;
+        margin: 0.2em 3em;
         display: flex;
         flex-direction: column;
         align-items: flex-start;

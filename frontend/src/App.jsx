@@ -70,7 +70,7 @@ function App() {
                         <ul className="question-list">
                             {
                                 questions[currentQuestion].questions.map(question => (
-                                    <li className="question"><span>{question}</span></li>
+                                    <li key={question} className="question"><span>{question}</span></li>
                                 ))
                             }
                         </ul>
@@ -89,6 +89,7 @@ function App() {
                             rows="10" cols="100"
                         >
                         </textarea>
+                        <small> Question {currentQuestion + 1} / 5</small>
                         <div className="buttons">
                             {currentQuestion > 0 ? <button className="button back" type="button" onClick={() => setCurrentQuestion(currentQuestion - 1)}>Back</button> : ""} 
                             {currentQuestion == 4 && formisValid() && <input className="button submit"  type="submit" value="Submit" />}
