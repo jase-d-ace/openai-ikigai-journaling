@@ -376,21 +376,16 @@ small {
     }
 }
 
-.footer {
+footer {
     text-align: center;
     align-self: center;
-    width: 100vw;
     background: #323441;
     color: #EFF0F4;
     display: flex;
+    width: 70em;
     flex-direction: column;
     position: absolute;
     bottom: 0;
-
-    footer {
-        width: 40em;
-        align-self: center;
-    }
 }
 
 @media (max-width: 750px) {
@@ -683,7 +678,7 @@ small {
         }
     }
 
-    .footer {
+    footer {
         margin-top: 3em;
     }
 }
