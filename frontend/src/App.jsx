@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useAuth } from "./authContext.jsx";
 import { questions } from "./questions.js";
 import Loading from "./components/Loading.jsx";
+import FormNav from "./components/FormNav.jsx";
 import Markdown from "react-markdown";
 import './App.css';
 
@@ -58,6 +59,7 @@ function App() {
                     What is Your Ikigai?
                 </h2>
             </header>
+            <FormNav questions={questions} currentQuestion={currentQuestion} setCurrentQuestion={setCurrentQuestion} />
             <div className="today-content">
                 <div className="ikigai-info">
                     <div className="ikigai title">
