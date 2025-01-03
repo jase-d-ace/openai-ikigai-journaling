@@ -135,7 +135,6 @@ header {
     margin-right: 1em;
     display: flex;
     flex-direction: column;
-    width: 66em;
 
     .form-nav {
         border: 1px solid #CDCED7;
@@ -148,13 +147,18 @@ header {
         .unanswered {
             font-weight: lighter;
         }
+
+        .current {
+            font-weight: bold;
+            padding-bottom: 0.25em;
+            border-bottom: 3px solid #EF00BF;
+        }
     }
 
     .today-content {
         display: flex;
         flex-direction: row;
         height: 32em;
-        max-width: 80em;
         margin-left: 1em;
 
         .ikigai-info {
@@ -186,7 +190,6 @@ small {
     align-items: flex-start;
     align-self: center;
     margin: 0.5em;
-    width: 45em;
     height: 31em;
     padding-top: 1em;
 
@@ -272,7 +275,6 @@ small {
     border-radius: 5px;
     margin: 1em 0 2em 1em;
     height: 24em;
-    width: 64em;
     overflow-y: scroll;
     padding: 1em 0 0 1em;
 }
@@ -326,7 +328,6 @@ small {
     .entries {
         height: 60em;
         overflow-y: scroll;
-        width: 70em;
     }
 }
 
@@ -395,10 +396,8 @@ footer {
     background: #323441;
     color: #EFF0F4;
     display: flex;
-    width: 70em;
     flex-direction: column;
-    position: absolute;
-    bottom: 0;
+    margin-top: 3em;
 }
 
 @media (max-width: 750px) {
@@ -521,6 +520,13 @@ footer {
 
         .mobile-show-more {
             display: inline;
+        }
+
+        .form-nav {
+            justify-content: space-between;
+            width: 22em;
+            padding-left: 1em;
+            padding-right: 1em;
         }
 
 
@@ -692,7 +698,7 @@ footer {
     }
 
     footer {
-        margin-top: 3em;
+        width: 24em;
     }
 }
 

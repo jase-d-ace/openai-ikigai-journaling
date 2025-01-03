@@ -8,14 +8,13 @@ export default function HistoricalContainer() {
     const [pastEntries, setPastEntries] = useState({});
     const { currentUser } = useAuth();
 
+    const dataFetch = async id => {
+        const data = await fetch(`http://localhost:8000/journals?id=${id}`);
+        const json = await data.json();
+        setPastEntries(json)
+    }
     if (currentUser.isLoggedIn && !pastEntries.journals?.length) {
-        const dataFetch = async () => {
-            const data = await fetch(`http://localhost:8000/journals?id=${currentUser.user.id}`);
-            const json = await data.json();
-            setPastEntries(json)
-        }
-
-        dataFetch();
+        dataFetch(currentUser.user.id);
     }
 
     return (
