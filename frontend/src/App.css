@@ -144,6 +144,10 @@ header {
         background:#B3F2FF;
         margin-bottom: 1em;
         cursor: pointer;
+
+        .unanswered {
+            font-weight: lighter;
+        }
     }
 
     .today-content {
