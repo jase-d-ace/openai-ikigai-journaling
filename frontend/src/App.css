@@ -278,7 +278,7 @@ small {
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  background: linear-gradient(0deg, #F5F5F8 50%, #B3F2FF 100%);
+  background: linear-gradient(0deg, #F5F5F8 50%, #AC008A 100%);
   animation: spin 1s linear infinite;
 }
 
