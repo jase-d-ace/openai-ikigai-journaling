@@ -69,6 +69,9 @@ function App() {
                         <p>{questions[currentQuestion].description}</p>
                     </div>
                     <div className="ikigai questions">
+                        <h4>
+                            Some questions to get you started...
+                        </h4>
                         <ul className="question-list">
                             {
                                 questions[currentQuestion].questions.map(question => (

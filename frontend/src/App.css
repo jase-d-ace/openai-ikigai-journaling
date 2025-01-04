@@ -159,6 +159,7 @@ header {
         display: flex;
         flex-direction: row;
         height: 32em;
+        max-width: 80em;
         margin-left: 1em;
 
         .ikigai-info {
@@ -190,6 +191,7 @@ small {
     align-items: flex-start;
     align-self: center;
     margin: 0.5em;
+    width: 45em;
     height: 31em;
     padding-top: 1em;
 
@@ -328,6 +330,7 @@ small {
     .entries {
         height: 60em;
         overflow-y: scroll;
+        width: 65em;
     }
 }
 
