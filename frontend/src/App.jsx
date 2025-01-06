@@ -28,7 +28,6 @@ function App() {
     }
 
     const handleInputChange = (name, query) => {
-
         setFormData({...formData, [name]: query});
         questions[currentQuestion].response = query;
     }
@@ -49,6 +48,15 @@ function App() {
         setResults(json);
         setLoading(false);
 
+    }
+
+    const resetFormData = () => {
+        setFormData({
+            content: "No other thoughts"
+        });
+        
+        setResults(null);
+        setCurrentQuestion(0);
     }
 
     return (
@@ -91,14 +99,17 @@ function App() {
                             placeholder={questions[currentQuestion].placeholder}
                             onChange={e => handleInputChange(questions[currentQuestion].label, e.target.value)}
                             value={questions[currentQuestion].response}
+                            disabled={!!results?.answer}
                             rows="10" cols="100"
                         >
                         </textarea>
                         <small> Question {currentQuestion + 1} / 5</small>
                         <div className="buttons">
                             {currentQuestion > 0 ? <button className="button back" type="button" onClick={() => setCurrentQuestion(currentQuestion - 1)}>Back</button> : ""} 
-                            {currentQuestion == 4 && formisValid() && <input className="button submit"  type="submit" value="Submit" />}
                             {currentQuestion < 4 ? <button className="button next" type="button" onClick={() => setCurrentQuestion(currentQuestion + 1)}>Next</button>: ""}
+                            {currentQuestion == 4 && !results?.answer && formisValid() && <input className="button submit"  type="submit" value="Submit" />}
+                            {currentQuestion == 4 && results?.answer && <button className="button" type="button" onClick={() => resetFormData()}>Try Again</button>}
+                            
                         </div>
                     </div>
                     <div className="desktop-more-info">
