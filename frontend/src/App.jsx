@@ -52,7 +52,7 @@ function App() {
     }
 
     return (
-        currentUser.isLoggedIn || localStorage.getItem("user_token") ? 
+        currentUser.isLoggedIn ? 
         <div className="todays-entry">
             <header>
                 <h2>
