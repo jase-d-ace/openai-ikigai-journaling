@@ -31,18 +31,18 @@ export default function Register() {
                 <h2>Create an Account</h2>
             </header>
             {submitted && <span className="error">{currentUser.error}</span>}
-            <form className="register-form" onSubmit={handleFormSubmit}>
+            <form className="register-form" onSubmit={handleFormSubmit} data-testid="registration-form">
                 <div className="field register-field username-field">
-                    <label>Username</label>
-                    <input className="register-text-input" onChange={e => handleFormInput("username", e.target.value)} type="text" />
+                    <label htmlFor="username">Username</label>
+                    <input id="username" className="register-text-input" placeholder="Username" onChange={e => handleFormInput("username", e.target.value)} type="text" />
                 </div>
                 <div className="field register-field password-field">
-                    <label>Password</label>
-                    <input className="register-text-input" onChange={e => handleFormInput("password", e.target.value)} type="password" />
+                    <label htmlFor="password">Password</label>
+                    <input id="password" className="register-text-input" placeholder="Password" onChange={e => handleFormInput("password", e.target.value)} type="password" />
                 </div>
                 <div className="field register-field confirm-field">
-                    <label>Confirm password</label>
-                    <input className="register-text-input" onChange={e => handleFormInput("confirm", e.target.value)} type="password" />
+                    <label htmlFor="confirm">Confirm password</label>
+                    <input id="confirm" className="register-text-input" placeholder="Confirm" onChange={e => handleFormInput("confirm", e.target.value)} type="password" />
                 </div>
                 <div className="field submit">
                     <input className="register-submit" value="Sign Up" type="submit" />

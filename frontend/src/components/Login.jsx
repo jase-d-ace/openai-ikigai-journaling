@@ -31,14 +31,14 @@ export default function Login() {
             
             {submitted && <span className="error">{currentUser.error}</span>}
 
-            <form className="login-form" onSubmit={handleFormSubmit}>
+            <form className="login-form" onSubmit={handleFormSubmit} data-testid="login-form">
                 <div className="field username-field">
                     <label>Username</label>
-                    <input className="login-text-input" type="text" onChange={e => handleFormInput("username", e.target.value)} />
+                    <input className="login-text-input" placeholder="Username" type="text" onChange={e => handleFormInput("username", e.target.value)} />
                 </div>
                 <div className="field password-field">
                     <label>Password</label>
-                    <input className="login-text-input" type="password" onChange={e => handleFormInput("password", e.target.value)} />
+                    <input className="login-text-input" type="password" placeholder="Password" onChange={e => handleFormInput("password", e.target.value)} />
                 </div>
                 <div className="field submit">
                     <input className="login-submit" value="Sign In" type="submit" />
