@@ -12,9 +12,9 @@ export default function TopBar() {
     return (
         <div className="top-bar">
             <Link to="/"><h3>Your Ikigai</h3></Link>
-            {currentUser.isLoggedIn || localStorage.getItem("user_token") ? 
+            {currentUser.isLoggedIn ? 
             <div className="user-info"> 
-                <strong>Welcome, {currentUser.user.username} |</strong> 
+                <strong>Welcome, <Link to="/me"><strong>{currentUser.user.username}</strong></Link> |</strong> 
                 <span className="logout" onClick={logout}> Log Out</span>
             </div>
             : 
