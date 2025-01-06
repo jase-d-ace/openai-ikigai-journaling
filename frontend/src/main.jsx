@@ -10,7 +10,6 @@ import Login from "./components/Login.jsx";
 import Register from "./components/Register.jsx";
 import TopBar from './components/TopBar.jsx';
 import About from "./components/About.jsx";
-import Footer from "./components/Footer.jsx";
 
 createRoot(document.getElementById('root')).render(
     <StrictMode>
@@ -25,7 +24,6 @@ createRoot(document.getElementById('root')).render(
                     <Route path="/register" element={<Register />} />
                     <Route path="/what-is" element={<About />} />
                 </Routes>
-                <Footer />
             </BrowserRouter>
         </AuthProvider>
     </StrictMode>
