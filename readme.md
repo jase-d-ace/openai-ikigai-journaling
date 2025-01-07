@@ -7,7 +7,7 @@ Rooted in Japanese culture, ikigai is about discovering the balance between what
 
 The word itself comes from "iki" (life) and "gai" (value or worth), making it a way to explore the things that bring value to your life and give you a reason to live. While the idea of ikigai is deeply ingrained in Japanese culture, its principles resonate universally and can serve as a powerful framework for anyone seeking clarity in their life or career.
 
-## What is this app?A
+## What is this app?
 user can provide ChatGPT with their 4 pillars of Ikigai and receive some more questions and guidance on finding it for themselves.
 
 ## How it works
