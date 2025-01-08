@@ -420,6 +420,11 @@ footer {
         flex-direction: row;
         justify-content: flex-start;
         padding: 1em;
+
+        .my-info {
+            height: 45em;
+            margin-right: 1em;
+        }
     }
 
     .profile-info {
@@ -427,6 +432,7 @@ footer {
         display: flex;
         flex-direction: column;
         align-items: flex-end;
+        justify-content: space-between;
         padding: 1em;
     }
     .profile-section {

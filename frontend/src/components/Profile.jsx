@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { useAuth } from "../authContext.jsx";
 import "../App.css";
 
 export default function Profile() {
+    const [isEditing, setIsEditing] = useState(false);
     const { currentUser } = useAuth();
 
     return (
