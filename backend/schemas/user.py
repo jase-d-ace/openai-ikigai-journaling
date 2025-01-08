@@ -6,6 +6,9 @@ class User(BaseModel):
     id: uuid.UUID
     username: str
     hashed_password: str
+    first_name: str
+    last_name: str
+    description: str
     journals: List["Journal"] = []
 
     class Config:

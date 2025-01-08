@@ -162,7 +162,7 @@ async def login(request: Request, db: Session = Depends(get_db)):
         data={"sub": db_user.username}, expires_delta=access_token_expires
     )
 
-    return user_response(200, {"username": db_user.username, "id": db_user.id}, access_token)
+    return user_response(200, {"username": db_user.username, "id": db_user.id, "first_name": db_user.first_name, "last_name": db_user.last_name, "description": db_user.description}, access_token)
 
 
 @app.get("/users/token")
@@ -171,9 +171,7 @@ def login_via_token(token: str, db: Session = Depends(get_db)):
         payload = jwt.decode(token, SECRET_KEY, algorithms=ALGORITHM)
         username = payload.get("sub")
     except:
-        # import pdb
-        # pdb.set_trace()
         return user_response(400, None, None, token_type="", message="Malformed Token")
     user = db.query(User).filter(User.username == username).first()
 
-    return user_response(200, {"username": user.username, "id": user.id}, token)
+    return user_response(200, {"username": user.username, "id": user.id, "first_name": user.first_name, "last_name": user.last_name, "description": user.description}, token)
