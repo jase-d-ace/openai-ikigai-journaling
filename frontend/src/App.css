@@ -408,7 +408,7 @@ footer {
 }
 
 .my-profile {
-    width: 70em;
+    width: 76em;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -439,6 +439,11 @@ footer {
         border: 1px solid red;
         width: 25em;
         height: 20em;
+        padding-left: 0.5em;
+
+        header h4 {
+            margin: 0;
+        }
     }
 }
 
