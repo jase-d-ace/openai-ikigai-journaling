@@ -31,6 +31,9 @@ class User(Base):
     id = Column(UUID(as_uuid=True), primary_key=True, index=True, nullable=False, default=uuid.uuid4)
     username = Column(String, unique=True, index=True)
     hashed_password = Column(String)
+    first_name = Column(String, default="")
+    last_name = Column(String, default="")
+    description = Column(String, default="")
     created_at = Column(TIMESTAMP(timezone=True), server_default=text('now()'))
     updated_at = Column(TIMESTAMP(timezone=True), server_default=text('now()'))
 
