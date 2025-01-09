@@ -527,7 +527,7 @@ footer {
     }
 }
 
-@media (max-width: 750px) {
+@media (max-width: 800px) {
     header {
         text-align: left;
         
@@ -846,6 +846,16 @@ footer {
                 width: 25em;
                 height: 12em;
                 margin: 0.5em 0 0.5em 0;
+
+                .info-field {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+    
+                    input {
+                        width: 24.5em;
+                    }
+                }
             }
 
             .personal-inputs {
@@ -854,11 +864,6 @@ footer {
                 align-items: flex-start;
                 margin-top: 1em;
 
-                .info-field {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: flex-start;
-                }
             }
         }
 
