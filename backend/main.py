@@ -7,6 +7,7 @@ from .settings import OPENAI_API_KEY, SECRET_KEY # if this apikey is on github, 
 from .db import engine, get_db
 from sqlalchemy.orm import Session
 from jose import jwt
+from .schemas.user_update import UserUpdate
 import logging
 
 app = FastAPI()
@@ -176,17 +177,19 @@ def login_via_token(token: str, db: Session = Depends(get_db)):
 
     return user_response(200, {"username": user.username, "id": user.id, "first_name": user.first_name, "last_name": user.last_name, "description": user.description, "journal_count": len(user.journals)}, token)
 
-@app.post("/users/update")
-async def update_user(id: str, token: str, request: Request, db: Session = Depends(get_db)):
+@app.put("/users/update")
+async def update_user(id: str, token: str, user_update: UserUpdate, request: Request, db: Session = Depends(get_db)):
     req = await request.json()
 
     db_user = db.query(User).filter(User.id == id).first()
 
-    db_user.first_name = req["first_name"]
-    db_user.last_name = req["last_name"]
-    db_user.description = req["description"]
+    user_data = user_update.model_dump(exclude_unset=True)
+    for k, v in user_data.items():
+        setattr(db_user, k, v)
+    
     db.add(db_user)
     db.commit()
+    db.refresh(db_user)
 
     return user_response(200, {"username": db_user.username, "id": db_user.id, "first_name": db_user.first_name, "last_name": db_user.last_name, "description": db_user.description, "journal_count": len(db_user.journals)}, token)
 
@@ -207,6 +210,8 @@ async def generate_gpt_analysis(id: str, db: Session = Depends(get_db)):
             "content": """
             The next message will be my previous journal entries in my journey to find my ikigai. 
             Given all of them, summarize them for me, tell me what you think they say about me, and give me some options for what I should look into given everything i included in my journals.
+            Please give me realistic suggestions for someone with limited time and funds that can lead to the most impact or improvement in a short time.
+            Additionally, please give me concrete examples for each suggestion/option to explore, and at the end, please recommend some content that I can consume to further explore the pillars of my ikigai.
             """
         },
             {"role": "user", "content": content}
