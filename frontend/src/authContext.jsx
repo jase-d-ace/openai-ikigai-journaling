@@ -121,8 +121,36 @@ export const AuthProvider = ({ children }) => {
         return false;
     }
 
+    const updateUserInfo = async (id, first_name, last_name, description) => {
+        const res = await fetch(`http://localhost:8000/users/update?id=${id}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                first_name,
+                last_name,
+                description
+            })
+        });
+
+        const json = await res.json();
+
+        if (json.status == 200) {
+            setCurrentUser({
+                ...currentUser,
+                user: json.user,
+            })
+        } else {
+            setCurrentUser({
+                ...currentUser,
+                error: json.message
+            })
+        }
+    }
+
     return (
-        <AuthContext.Provider value={{ currentUser, login, logout, register, loginWithToken }}>
+        <AuthContext.Provider value={{ currentUser, login, logout, register, loginWithToken, updateUserInfo }}>
             {children}
         </AuthContext.Provider>
     )
