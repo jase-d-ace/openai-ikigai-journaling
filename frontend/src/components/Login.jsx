@@ -1,4 +1,4 @@
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../authContext";
 import "../App.css";
@@ -10,6 +10,9 @@ export default function Login() {
         password: "",
     })
     const { currentUser, login } = useAuth()
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || "/"
 
     const handleFormInput = (name, text) => {
         setLoginFormData({...loginFormData, [name]: text})
@@ -23,7 +26,7 @@ export default function Login() {
 
     return (
         currentUser.isLoggedIn ? 
-        <Navigate replace to="/" /> :
+        <Navigate replace to={from} /> :
         <div className="login">
             <header>
                 <h2>Log in to start journaling</h2>

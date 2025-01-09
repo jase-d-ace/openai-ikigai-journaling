@@ -18,7 +18,6 @@ export default function HistoricalContainer() {
     }
 
     return (
-        currentUser.isLoggedIn ? 
         <div className="past-entries">
             <header>
                 <h2>Your Entries</h2>
@@ -33,7 +32,6 @@ export default function HistoricalContainer() {
                 }                
             </div>
             <p>Your Ikigai is closer than you think. Keep moving towards it.</p>
-        </div> :
-        <Navigate replace to="/login" />
+        </div> 
     )
 }

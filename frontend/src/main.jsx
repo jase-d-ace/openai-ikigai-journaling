@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './index.css'
 import { AuthProvider } from "./authContext.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import App from './App.jsx'
 import Nav from "./components/Nav.jsx";
 import HistoricalContainer from './components/HistoricalContainer.jsx';
@@ -19,12 +20,24 @@ createRoot(document.getElementById('root')).render(
                 <TopBar />
                 <Nav />
                 <Routes>
-                    <Route path="/" element={<App />} />
-                    <Route path="/historical" element={<HistoricalContainer />} />
+                    <Route path="/" element={
+                        <ProtectedRoute>
+                            <App />
+                        </ProtectedRoute>} />
+                    <Route path="/historical" element={
+                        <ProtectedRoute>
+                            <HistoricalContainer />
+                        </ProtectedRoute>} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
-                    <Route path="/what-is" element={<About />} />
-                    <Route path="/me" element={<Profile />} />
+                    <Route path="/what-is" element={
+                        <ProtectedRoute>
+                            <About />
+                        </ProtectedRoute>} />
+                    <Route path="/me" element={
+                        <ProtectedRoute>
+                            <Profile />
+                        </ProtectedRoute>} />
                 </Routes>
             </BrowserRouter>
         </AuthProvider>

@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { Navigate } from "react-router-dom";
 import { useAuth } from "../authContext.jsx";
 import Loading from "../components/Loading.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -56,11 +57,11 @@ export default function Profile() {
                         <div className="section-info personal-inputs">
                             <div className="info-field">
                                 <label htmlFor="first-name">First Name: </label>
-                                <input ref={nameRef} className="profile-input-field name" value={currentUser.first_name} disabled={!isEditing.name} onChange={e => handleInputChange("firstName", e.target.value)} />
+                                <input ref={nameRef} className="profile-input-field name" value={currentUser.user.first_name} disabled={!isEditing.name} onChange={e => handleInputChange("firstName", e.target.value)} />
                             </div>
                             <div className="info-field">
                                 <label htmlFor="last-name">Last Name: </label>
-                                <input className="profile-input-field name" value={currentUser.last_name} disabled={!isEditing.name} onChange={e => handleInputChange("lastName", e.target.value)} />
+                                <input className="profile-input-field name" value={currentUser.user.last_name} disabled={!isEditing.name} onChange={e => handleInputChange("lastName", e.target.value)} />
                             </div>
                         </div>
                     </div>
@@ -71,11 +72,11 @@ export default function Profile() {
                         </header>
                         <div className="section-info">
                             <div className="info-field">
-                                <textarea ref={descriptionRef} rows="10" cols="49" value={currentUser.description} disabled={!isEditing.description} onChange={e => handleInputChange("description", e.target.value)} />
+                                <textarea className="profile-input-field" ref={descriptionRef} rows="10" cols="49" value={currentUser.user.description} disabled={!isEditing.description} onChange={e => handleInputChange("description", e.target.value)} />
                             </div>
                         </div>
                     </div>
-                    {isEditing && <button className="button profile-button" onClick={() => handleProfileFormChange()}>Save</button>}
+                    {(isEditing.name || isEditing.description) && <button className="button profile-button" onClick={() => handleProfileFormChange()}>Save</button>}
                 </div>
                 <div className="profile-info">
                     <div className="profile-section gpt-analysis">

@@ -3,11 +3,7 @@ import { useAuth } from "../authContext";
 import "../App.css";
 
 export default function TopBar() {
-    const { currentUser, logout, loginWithToken } = useAuth();
-
-    if (localStorage.getItem("user_token") && !currentUser.isLoggedIn) {
-        loginWithToken(localStorage.getItem("user_token"));
-    }
+    const { currentUser, logout } = useAuth();
 
     return (
         <div className="top-bar">
