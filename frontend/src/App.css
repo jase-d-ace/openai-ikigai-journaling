@@ -481,9 +481,12 @@ footer {
             align-items: flex-start;
         }
 
-        .profile-input-field {
+        .name {
             height: 2em;
             width: 20em;
+        }
+
+        .profile-input-field {
             background: #F5F5F8;
             border: 1px solid #CDCED7;
             box-shadow: 3px 3px 3px #DdDdDd;
