@@ -412,15 +412,16 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    border: 1px solid pink;
     height: 65em;
 
+    h2 {
+        margin-left: 1em;
+    }
+
     .profile-container {
-        border: 1px solid blue;
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
-        padding: 1em;
         width: 74em;
         height: 60em;
 
@@ -438,13 +439,15 @@ footer {
     }
 
     .personal-info {
-        border: 1px solid green;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         justify-content: flex-start;
-        padding: 1em;
 
+        span {
+            margin-top: 1em;
+            align-self: center;
+        }
     }
     .profile-section {
         background: #F5F5F8;
@@ -500,9 +503,10 @@ footer {
     }
 
     .gpt-analysis {
-        border: 1px solid cornflowerblue;
         height: 58em;
         width: 40em;
+        padding-right: 1em;
+        overflow-y: scroll;
 
         header {
             align-self: center;

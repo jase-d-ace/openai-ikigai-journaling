@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from "react";
-import { Navigate } from "react-router-dom";
 import { useAuth } from "../authContext.jsx";
 import Loading from "../components/Loading.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,29 +7,37 @@ import Markdown from "react-markdown";
 import "../App.css";
 
 export default function Profile() {
+    const { currentUser, updateUserInfo } = useAuth();
+
     const [isEditing, setIsEditing] = useState({
         name: false,
-        description: false
+        description: false,
     });
+
     const [profileFormData, setProfileFormData] = useState({
-        firstName: "",
-        lastName: "",
-        description: "",
+        firstName: currentUser.user.first_name,
+        lastName: currentUser.user.last_name,
+        description: currentUser.user.description,
     });
-    const [loading, setLoading] = useState(false);
+
+    const [loading, setLoading] = useState({
+        updatingUser: false,
+        fetchingGPTResponse: false,
+    });
+
+    const [userUpdated, setUserUpdated] = useState(false);
 
     const [gptResponse, setGptResponse] = useState("");
 
     useEffect(() => {
         if (isEditing.name) {
             nameRef.current.select();
-        }
+        };
 
         if (isEditing.description) {
             descriptionRef.current.select();
-        }
-    }, [isEditing])
-    const { currentUser, updateUserInfo } = useAuth();
+        };
+    }, [isEditing]);
     const nameRef = useRef();
     const descriptionRef = useRef();
 
@@ -38,34 +45,54 @@ export default function Profile() {
         setIsEditing({
             ...isEditing,
             [ref]: !isEditing[ref]
-        })
-    }
+        });
+    };
 
     const handleInputChange = (name, query) => {
         setProfileFormData({
             ...profileFormData,
             [name]: query
-        })
-    }
+        });
+    };
 
     const handleProfileFormChange = async () => {
-        const { firstName, lastName, description} = profileFormData
-        await updateUserInfo(currentUser.user.id, localStorage.getItem("user_token"), firstName, lastName, description)
+        const { firstName, lastName, description} = profileFormData;
+
+        setLoading({
+            ...loading,
+            updatingUser: true,
+        });
+
+        await updateUserInfo(currentUser.user.id, localStorage.getItem("user_token"), firstName, lastName, description);
+
         setIsEditing({
             name: false,
-            description: false
-        })
-    }
+            description: false,
+        });
+
+        setLoading({
+            ...loading,
+            updatingUser: false,
+        });
+
+        setUserUpdated(true);
+    };
 
     const fetchGPTResponse = async () => {
-        setLoading(true);
+        setLoading({
+            ...loading,
+            fetchingGPTResponse: true
+        });
 
         const gptRes = await fetch(`http://localhost:8000/users/generate-gpt?id=${currentUser.user.id}`);
         const gptJson = await gptRes.json();
 
         setGptResponse(gptJson.analysis);
-        setLoading(false);
-    }
+        setLoading({
+            ...loading,
+            fetchingGPTResponse: false
+        });
+    };
 
     return (
         <div className="my-profile">
@@ -80,11 +107,11 @@ export default function Profile() {
                         <div className="section-info personal-inputs">
                             <div className="info-field">
                                 <label htmlFor="first-name">First Name: </label>
-                                <input ref={nameRef} className="profile-input-field name" value={currentUser.user.first_name} disabled={!isEditing.name} onChange={e => handleInputChange("firstName", e.target.value)} />
+                                <input ref={nameRef} className="profile-input-field name" value={profileFormData.firstName} disabled={!isEditing.name} onChange={e => handleInputChange("firstName", e.target.value)} />
                             </div>
                             <div className="info-field">
                                 <label htmlFor="last-name">Last Name: </label>
-                                <input className="profile-input-field name" value={currentUser.user.last_name} disabled={!isEditing.name} onChange={e => handleInputChange("lastName", e.target.value)} />
+                                <input className="profile-input-field name" value={profileFormData.lastName} disabled={!isEditing.name} onChange={e => handleInputChange("lastName", e.target.value)} />
                             </div>
                         </div>
                     </div>
@@ -95,7 +122,7 @@ export default function Profile() {
                         </header>
                         <div className="section-info">
                             <div className="info-field">
-                                <textarea className="profile-input-field" ref={descriptionRef} rows="10" cols="49" value={currentUser.user.description} disabled={!isEditing.description} onChange={e => handleInputChange("description", e.target.value)} />
+                                <textarea className="profile-input-field" ref={descriptionRef} rows="10" cols="49" value={profileFormData.description} disabled={!isEditing.description} onChange={e => handleInputChange("description", e.target.value)} />
                             </div>
                         </div>
                     </div>
@@ -110,6 +137,8 @@ export default function Profile() {
                             </div>
                         </div>
                     </div>
+                    {loading.updatingUser && <Loading />}
+                    {userUpdated && <span>Changes Saved! &#9989;</span>}
                     {(isEditing.name || isEditing.description) && <button className="profile-button" onClick={() => handleProfileFormChange()}>Save</button>}
                 </div>
                 <div className="profile-info">
@@ -118,7 +147,7 @@ export default function Profile() {
                             <h4>What GPT thinks of me</h4>
                         </header>
                         <div className="section-info gpt-field">
-                            {loading && <Loading />}
+                            {loading.fetchingGPTResponse && <Loading />}
                             {gptResponse && <Markdown>{gptResponse}</Markdown>}
                             {!gptResponse && <button className="profile-button" onClick={() => fetchGPTResponse()}>Get Graded</button>}
                         </div>
