@@ -422,18 +422,33 @@ footer {
         padding: 1em;
 
         .my-info {
-            height: 45em;
             margin-right: 1em;
+        }
+
+        .description {
+            margin-top: 1em;
         }
     }
 
-    .profile-info {
+    .personal-info {
         border: 1px solid green;
         display: flex;
         flex-direction: column;
-        align-items: flex-end;
-        justify-content: space-between;
+        align-items: flex-start;
+        justify-content: flex-start;
         padding: 1em;
+
+        .profile-button {
+            margin-top: 0.5em;
+            background: #F5F5F8;
+            border: 1px solid #CDCED7;
+            box-shadow: 3px 3px 3px #DdDdDd;
+            border-radius: 5px;
+            font-size: 1em;
+            align-self: center;
+            height: 2em;
+            width: 7em;
+        }
     }
     .profile-section {
         border: 1px solid red;
@@ -441,8 +456,42 @@ footer {
         height: 20em;
         padding-left: 0.5em;
 
-        header h4 {
-            margin: 0;
+        header {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+
+            h4 {
+                margin: 0.5em 0 0.5em 0;
+            }
+
+            .edit-button {
+                margin: 0.6em 0 0.3em 0.4em;
+                color: #323441;
+                cursor: pointer;
+            }
+        }
+
+        .personal-inputs {
+            border: 1px solid purple;
+            height: 6em;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: flex-start;
+        }
+
+        .profile-input-field {
+            height: 2em;
+            width: 20em;
+            background: #F5F5F8;
+            border: 1px solid #CDCED7;
+            box-shadow: 3px 3px 3px #DdDdDd;
+            border-radius: 5px;
+        }
+
+        .profile-input-field:disabled {
+            background: #EFF0F4;
         }
     }
 }
