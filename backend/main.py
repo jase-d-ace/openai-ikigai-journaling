@@ -211,7 +211,7 @@ async def generate_gpt_analysis(id: str, db: Session = Depends(get_db)):
             The next message will be my previous journal entries in my journey to find my ikigai. 
             Given all of them, summarize them for me, tell me what you think they say about me, and give me some options for what I should look into given everything i included in my journals.
             Please give me realistic suggestions for someone with limited time and funds that can lead to the most impact or improvement in a short time.
-            Additionally, please give me concrete examples for each suggestion/option to explore, and at the end, please recommend some content that I can consume to further explore the pillars of my ikigai.
+            Additionally, please give me concrete examples for each suggestion/option to explore, and at the end, please recommend some content related to my interests that might help me educate myself further about that topic and how it might relate to ikigai
             """
         },
             {"role": "user", "content": content}
