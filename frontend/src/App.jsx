@@ -1,4 +1,3 @@
-import { Navigate } from "react-router-dom";
 import { useState } from 'react';
 import { useAuth } from "./authContext.jsx";
 import { questions } from "./questions.js";
