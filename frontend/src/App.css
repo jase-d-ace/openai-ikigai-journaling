@@ -541,6 +541,10 @@ footer {
         }
         
     }
+    
+    .top-bar {
+        width: 22em;
+    }
 
     .register {
         border: 1px solid #CDCED7;
@@ -825,6 +829,53 @@ footer {
     .image {
         img {
             display:none;
+        }
+    }
+
+    .my-profile {
+        width: 24em;
+        justify-content: flex-start;
+        height: 100vh;
+
+        .profile-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            padding: 0 0.5em 0 0.5em;
+            width: 23em;
+            height: 100vh;
+
+            .profile-section {
+                font-size: 14px;
+                width: 25em;
+                height: 12em;
+                margin: 0.5em 0 0.5em 0;
+            }
+
+            .personal-inputs {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                margin-top: 1em;
+
+                .info-field {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+            }
+        }
+
+        textarea {
+            width: 25em;
+            height: 8em;
+        }
+
+        .gpt-analysis {
+            height: 15em;
+            width: 25em;
+            padding: 0.2em;
         }
     }
 }
