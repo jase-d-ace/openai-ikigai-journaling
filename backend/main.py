@@ -134,7 +134,7 @@ async def register(request: Request, db: Session = Depends(get_db)):
 
     db_user = db.query(User).filter(User.username == req["username"]).first()
     if db_user:
-        return user_response(400, None, None, token_type="", message="Unable to create this user")
+        return user_response(400, None, None, 0, token_type="", message="Unable to create this user")
 
     new_user = User(username=req["username"])
     new_user.set_password(req["password"])
@@ -145,7 +145,7 @@ async def register(request: Request, db: Session = Depends(get_db)):
     access_token = create_access_token(
         data={"sub": new_user.username}, expires_delta=access_token_expires
     )
-    return user_response(200, {"username": new_user.username, "id": new_user.id}, access_token)
+    return user_response(200, {"username": new_user.username, "id": new_user.id, "journal_count": 0}, access_token)
 
 
 @app.post("/users/login")
@@ -162,7 +162,7 @@ async def login(request: Request, db: Session = Depends(get_db)):
         data={"sub": db_user.username}, expires_delta=access_token_expires
     )
 
-    return user_response(200, {"username": db_user.username, "id": db_user.id, "first_name": db_user.first_name, "last_name": db_user.last_name, "description": db_user.description}, access_token)
+    return user_response(200, {"username": db_user.username, "id": db_user.id, "first_name": db_user.first_name, "last_name": db_user.last_name, "description": db_user.description, "journal_count": len(db_user.journals)}, access_token)
 
 
 @app.get("/users/token")
@@ -174,4 +174,48 @@ def login_via_token(token: str, db: Session = Depends(get_db)):
         return user_response(400, None, None, token_type="", message="Malformed Token")
     user = db.query(User).filter(User.username == username).first()
 
-    return user_response(200, {"username": user.username, "id": user.id, "first_name": user.first_name, "last_name": user.last_name, "description": user.description}, token)
+    return user_response(200, {"username": user.username, "id": user.id, "first_name": user.first_name, "last_name": user.last_name, "description": user.description, "journal_count": len(user.journals)}, token)
+
+@app.post("/users/update")
+async def update_user(id: str, token: str, request: Request, db: Session = Depends(get_db)):
+    req = await request.json()
+
+    db_user = db.query(User).filter(User.id == id).first()
+
+    db_user.first_name = req["first_name"]
+    db_user.last_name = req["last_name"]
+    db_user.description = req["description"]
+    db.add(db_user)
+    db.commit()
+
+    return user_response(200, {"username": db_user.username, "id": db_user.id, "first_name": db_user.first_name, "last_name": db_user.last_name, "description": db_user.description, "journal_count": len(db_user.journals)}, token)
+
+@app.get("/users/generate-gpt")
+async def generate_gpt_analysis(id: str, db: Session = Depends(get_db)):
+    db_user = db.query(User).filter(User.id == id).first()
+    journals = db_user.journals
+
+    content = ""
+
+    for journal in journals:
+        content += f"""
+            My mission: {journal.mission}, My passion: {journal.passion}, My profession: {journal.profession}, My vocation: {journal.vocation}, any other thoughts: {journal.other}
+        """
+
+    messages = [
+        {"role": "system", 
+            "content": """
+            The next message will be my previous journal entries in my journey to find my ikigai. 
+            Given all of them, summarize them for me, tell me what you think they say about me, and give me some options for what I should look into given everything i included in my journals.
+            """
+        },
+            {"role": "user", "content": content}
+    ]
+
+    completion = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=messages,
+        temperature=0.7
+    )
+
+    return {"status": 200, "analysis": completion.choices[0].message.content}
