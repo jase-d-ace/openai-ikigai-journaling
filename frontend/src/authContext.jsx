@@ -123,7 +123,7 @@ export const AuthProvider = ({ children }) => {
 
     const updateUserInfo = async (id, token, first_name, last_name, description) => {
         const res = await fetch(`http://localhost:8000/users/update?id=${id}&token=${token}`, {
-            method: "POST",
+            method: "PUT",
             headers: {
                 "Content-Type": "application/json",
             },
