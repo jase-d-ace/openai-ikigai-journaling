@@ -121,8 +121,8 @@ export const AuthProvider = ({ children }) => {
         return false;
     }
 
-    const updateUserInfo = async (id, first_name, last_name, description) => {
-        const res = await fetch(`http://localhost:8000/users/update?id=${id}`, {
+    const updateUserInfo = async (id, token, first_name, last_name, description) => {
+        const res = await fetch(`http://localhost:8000/users/update?id=${id}&token=${token}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -140,6 +140,7 @@ export const AuthProvider = ({ children }) => {
             setCurrentUser({
                 ...currentUser,
                 user: json.user,
+                token: json.token,
             })
         } else {
             setCurrentUser({
