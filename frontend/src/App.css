@@ -159,7 +159,6 @@ header {
         display: flex;
         flex-direction: row;
         height: 32em;
-        max-width: 80em;
         margin-left: 1em;
 
         .ikigai-info {
@@ -330,7 +329,6 @@ small {
     .entries {
         height: 60em;
         overflow-y: scroll;
-        width: 65em;
     }
 }
 
@@ -408,11 +406,9 @@ footer {
 }
 
 .my-profile {
-    width: 76em;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    height: 65em;
 
     h2 {
         margin-left: 1em;
@@ -423,7 +419,6 @@ footer {
         flex-direction: row;
         justify-content: space-evenly;
         width: 74em;
-        height: 60em;
 
         .my-info {
             margin-right: 1em;
@@ -503,7 +498,7 @@ footer {
     }
 
     .gpt-analysis {
-        height: 58em;
+        height: 30.5em;
         width: 40em;
         padding-right: 1em;
         overflow-y: scroll;
