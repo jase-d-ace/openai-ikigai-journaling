@@ -38,10 +38,13 @@ export default function Profile() {
             descriptionRef.current.select();
         };
     }, [isEditing]);
+
+
     const nameRef = useRef();
     const descriptionRef = useRef();
 
     const handleClick = (ref) => {
+        setUserUpdated(false);
         setIsEditing({
             ...isEditing,
             [ref]: !isEditing[ref]
