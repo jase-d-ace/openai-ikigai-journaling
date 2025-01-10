@@ -321,6 +321,8 @@ small {
     border-radius: 5px;
     padding: 0.5em;
     margin-top: 1em;
+    height: 42em;
+    overflow-y: scroll;
     
     h2 {
         margin: 0;
