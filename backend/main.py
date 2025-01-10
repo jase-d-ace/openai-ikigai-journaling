@@ -200,6 +200,9 @@ async def generate_gpt_analysis(id: str, db: Session = Depends(get_db)):
 
     content = ""
 
+    if not journals:
+        return {"status": 200, "analysis": "You haven't written any journals yet! Go make some and then come back for a GPT-generated analysis after you've written one."}
+
     for journal in journals:
         content += f"""
             My mission: {journal.mission}, My passion: {journal.passion}, My profession: {journal.profession}, My vocation: {journal.vocation}, any other thoughts: {journal.other}
